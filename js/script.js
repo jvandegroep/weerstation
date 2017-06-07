@@ -13,6 +13,7 @@ function getData(url,res){
         }
         if (xhttp.readyState == 4 && xhttp.status == 404) {
           console.log("connection failed, no response from URL:", url);
+          console.log("loading dummy data..")
         }
   };
   xhttp.open("GET", url, true);
