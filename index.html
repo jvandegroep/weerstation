@@ -4,12 +4,21 @@
   <title>Weerstation Wilde Zwaan</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <!-- jquery -->
   <script src="./js/script.js"></script>
   <script src="./src/jquery.min.js" type="text/javascript"></script>
+  <!-- morris -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+  <!-- stylesheets -->
   <link rel="stylesheet" type="text/css" href="./css/style.css">
+  
 </head>
 <body>
 
@@ -21,28 +30,28 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Home</a>
+        <a class="navbar-brand" href="#" id="hrefHome">Home</a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Temperatuur <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#tempWeek">laatste 7 dagen</a></li>
-              <li><a href="#tempMonth">laatste maand</a></li>
-              <li><a href="#tempYear">laatste 12 maanden</a></li>
+              <li><a href="#">laatste 7 dagen</a></li>
+              <li><a href="#">laatste maand</a></li>
+              <li><a href="#">laatste 12 maanden</a></li>
             </ul>
           </li>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Luchtvochtigheid <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#humidWeek">laatste 7 dagen</a></li>
-              <li><a href="#humidMonth">laatste maand</a></li>
-              <li><a href="#humidYear">laatste 12 maanden</a></li>
+              <li><a href="#">laatste 7 dagen</a></li>
+              <li><a href="#">laatste maand</a></li>
+              <li><a href="#">laatste 12 maanden</a></li>
             </ul>
           </li>
-          <li><a href="#">Onderhoud</a></li>
-          <li><a href="#">Over Ons</a></li>
+          <li><a href="#" id="hrefMaintenance">Onderhoud</a></li>
+          <li><a href="#" id="hrefAbout">Over Ons</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -58,25 +67,52 @@
   </div>
 
 
-  <div id="home" name="page" class="container-fluid">
+  <div class="container-fluid page home">
     <div class="row">
-      <div class="col-sm-2"></div>
-      <div class="col-sm-10">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-5">
         <h3 id="titelHome">Het weer (laatste uur):</h3>
         <br />
         <h4>Temperatuur:</h4>
         <table id="currenttemp"></table>
         <br />
+        <br />
         <h4>Luchtvochtigheid:</h4>
         <table id="currenthumid"></table>
         <br />
+      </div>
+      <div class="col-sm-5">
+        <br /> 
+        <br /> 
+        <br />
+        <p id=homeChartTemp style="height: 200px"></p>
+        <p id=homeChartHumid style="height: 200px"></p>
+      </div>
+      <div class="col-sm-1"></div>
+    </div>
+  </div>
+  
+  <div class="container-fluid page maint">
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-11">
+        <h2> onderhoudspagina </h2> 
+      </div>
+    </div>
+  </div>
+  
+  <div class="container-fluid page about">
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-11">
+        <h2 > Over ons </h2> 
       </div>
     </div>
   </div>
 
   <footer class="footer">
     <div class="container footerTXT">
-      <p class="text-muted"> Jacob van de Groep | 2016 | Copyright </p>
+      <p class="text-muted"> Jacob van de Groep | 2017 | Copyright </p>
     </div>
   </footer>
 
