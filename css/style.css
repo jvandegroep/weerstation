@@ -1,9 +1,20 @@
 .customJumboBG{
-  background-image: url("/img/clouds.jpg");
+  /* background-image: url("/img/clouds.jpg"); */
   background-size: 100%;
   background-repeat: no-repeat;
-  background-color: transparent;
-  color: white;
+  background-color: #eceeef;
+  padding-left: 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: black;
+}
+
+#hoofdtitel {
+  font-weight: 100;
+}
+
+#titelHome {
+  font-weight: 400;
 }
 
 .footer {
@@ -19,8 +30,12 @@
   padding-top: 10px;
 }
 
+.navbar {
+  margin-bottom: 0px;
+}
+
 body {
-  font-family: "wf_segoe-ui_semilight", "Segoe UI Semilight", "Segoe WP Semilight", "Segoe UI", "Segoe WP", Tahoma, Arial, sans-serif;
+  font-family: "-apple-system","system-ui","BlinkMacSystemFont","Segoe UI","Roboto","Helvetica Neue","Arial","sans-serif";
 }
 
 table {

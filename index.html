@@ -4,16 +4,16 @@
   <title>Weerstation Wilde Zwaan</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="./js/script.js"></script>
   <script src="./src/jquery.min.js" type="text/javascript"></script>
   <link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 <body>
 
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -28,7 +28,6 @@
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Temperatuur <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#">Vandaag</a></li>
               <li><a href="#">laatste 7 dagen</a></li>
               <li><a href="#">laatste maand</a></li>
               <li><a href="#">laatste 12 maanden</a></li>
@@ -37,13 +36,12 @@
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Luchtvochtigheid <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#">Vandaag</a></li>
               <li><a href="#">laatste 7 dagen</a></li>
               <li><a href="#">laatste maand</a></li>
               <li><a href="#">laatste 12 maanden</a></li>
             </ul>
           </li>
-          <li><a href="#">Maintenance</a></li>
+          <li><a href="#">Onderhoud</a></li>
           <li><a href="#">Over Ons</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -53,24 +51,18 @@
     </div>
   </nav>
 
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-0"></div>
-      <div class="col-sm-12">
-        <div class="jumbotron customJumboBG">
-            <h1 class="display-3"> Weerstation Wilde Zwaan</h1>
-            <p class="lead"> Temperatuur & luchtvochtigheid metingen</p>
-        </div>
-      </div>
-      <div class="col-sm-0"></div>
-    </div>
+
+  <div class="jumbotron customJumboBG">
+    <h1 class="display-3" id="hoofdtitel"> Weerstation Wilde Zwaan</h1>
+    <p class="lead"> Temperatuur & luchtvochtigheid metingen</p>
   </div>
 
-  <div class="container-fluid">
+
+  <div id="home" name="page" class="container-fluid">
     <div class="row">
       <div class="col-sm-2"></div>
       <div class="col-sm-10">
-        <h3>Het weer (laatste uur):</h3>
+        <h3 id="titelHome">Het weer (laatste uur):</h3>
         <br />
         <h4>Temperatuur:</h4>
         <table id="currenttemp"></table>
@@ -79,8 +71,6 @@
         <table id="currenthumid"></table>
         <br />
       </div>
-
-
     </div>
   </div>
 
