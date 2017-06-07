@@ -1,7 +1,7 @@
 // Static variables
 var DBHOST = "10.0.75.1";
 var DBPORT = "5984";
-var DBURL = "http://" + DBHOST + ":" + DBPORT + "/data/_design/measurements/_view/byhour";
+var DBURL = "https://" + DBHOST + ":" + DBPORT + "/data/_design/measurements/_view/byhour";
 
 // Get DB data from url and send back data
 function getData(url,res){
@@ -11,18 +11,23 @@ function getData(url,res){
           console.log("data received (200) from: " + DBHOST + " on port: " + DBPORT);
           res(xhttp.responseText);
         }
-        if (xhttp.readyState == 4 && xhttp.status == 404) {
-          console.log("connection failed, no response from URL:", url);
-          console.log("loading dummy data..")
-        }
+    if (xhttp.readyState == 4 && xhttp.status == 404) {
+      console.log("connection failed, no response from URL:", url);
+    }
   };
   xhttp.open("GET", url, true);
+  xhttp.timeout = 500; // time in milliseconds
+  xhttp.ontimeout = function(e) {
+    console.error("Timeout, cannot contact ", DBURL)
+    res("");
+  }
   xhttp.send();
 }
 
 // Create specific table and size
 function createCustomTable(elid, level, sensortype, station, timeunit){
   var d=new Date();
+  var startparams;
   if (arguments[4] == "hour") {startparams=[sensortype, d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate(),d.getUTCHours()-1, d.getUTCMinutes(), station];}
   if (arguments[4] == "day") {startparams=[sensortype, d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate()-1,d.getUTCHours(), d.getUTCMinutes(), station];}
   if (arguments[4] == "week") {startparams=[sensortype, d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate(),d.getUTCHours(), d.getUTCMinutes(), station];}
@@ -36,6 +41,31 @@ function createCustomTable(elid, level, sensortype, station, timeunit){
   if (arguments[2] == "temp") {unit = " ℃";} else {unit = " %";}
   console.log("argument[2]=", unit, "startparams=", startparams);
   getData(fullURL, function (res){
+
+      if (!res && JSON.stringify(fullURL).indexOf('temp') >= 0){
+        console.log("loading temp dummy data..");
+        
+        res = JSON.stringify({"rows":[
+            {"key":["temp",2016,3,19,20,42,"station1"],"value":{"sum":99,"count":1,"min":99,"max":99,"sumsqr":9801}},
+            {"key":["temp",2016,7,13,14,29,"station2"],"value":{"sum":27,"count":1,"min":27,"max":27,"sumsqr":729}},
+            {"key":["temp",2016,7,13,15,16,"station1"],"value":{"sum":30,"count":1,"min":30,"max":30,"sumsqr":900}},
+            {"key":["temp",2016,7,13,17,15,"station2"],"value":{"sum":25,"count":1,"min":25,"max":25,"sumsqr":625}},
+            {"key":["temp",2019,9,14,1,3,"station3"],"value":{"sum":98,"count":1,"min":98,"max":98,"sumsqr":9604}}
+            ]});
+      }
+      
+     if (!res && JSON.stringify(fullURL).indexOf('humid') >= 0){
+        console.log("loading humid dummy data..");
+        
+        res = JSON.stringify({"rows":[
+            {"key":["humid",2016,3,19,20,42,"station1"],"value":{"sum":99,"count":1,"min":99,"max":99,"sumsqr":9801}},
+            {"key":["humid",2016,7,13,14,29,"station2"],"value":{"sum":68,"count":1,"min":68,"max":68,"sumsqr":4624}},
+            {"key":["humid",2016,7,13,15,16,"station1"],"value":{"sum":70,"count":1,"min":70,"max":70,"sumsqr":4900}},
+            {"key":["humid",2016,7,13,17,15,"station2"],"value":{"sum":65,"count":1,"min":65,"max":65,"sumsqr":4225}},
+            {"key":["humid",2019,9,14,1,3,"station3"],"value":{"sum":98,"count":1,"min":98,"max":98,"sumsqr":9604}}
+            ]});
+      }
+
       var actualtable = "";
       var a = JSON.parse(res);
       for (var i = 0; i < a.rows.length; i++) {
