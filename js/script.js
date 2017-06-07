@@ -19,9 +19,9 @@ function getData(url,res){
   xhttp.open("GET", url, true);
   xhttp.timeout = 500; // time in milliseconds
   xhttp.ontimeout = function(e) {
-    console.error("Timeout, cannot contact ", DBURL)
+    console.error("Timeout, cannot contact ", DBURL);
     res("");
-  }
+  };
   xhttp.send();
 }
 
@@ -31,7 +31,7 @@ function createCustomTable(elid, level, sensortype, station, timeunit, chartID){
   var startparams;
   if (arguments[4] == "hour") {startparams=[sensortype, d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate(),d.getUTCHours()-1, d.getUTCMinutes(), station];}
   if (arguments[4] == "day") {startparams=[sensortype, d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate()-1,d.getUTCHours(), d.getUTCMinutes(), station];}
-  if (arguments[4] == "week") {startparams=[sensortype, d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate(),d.getUTCHours(), d.getUTCMinutes(), station];}
+  if (arguments[4] == "week") {startparams=[sensortype, d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate()-7,d.getUTCHours(), d.getUTCMinutes(), station];}
   if (arguments[4] == "month") {startparams=[sensortype, d.getUTCFullYear(),d.getUTCMonth()-1,d.getUTCDate(),d.getUTCHours(), d.getUTCMinutes(), station];}
   if (arguments[4] == "year") {startparams=[sensortype, d.getUTCFullYear()-1,d.getUTCMonth(),d.getUTCDate(),d.getUTCHours(), d.getUTCMinutes(), station];}
   if (arguments[4] == "all") {startparams=[sensortype, d.getUTCFullYear()-10,d.getUTCMonth(),d.getUTCDate(),d.getUTCHours(), d.getUTCMinutes(), station];}
@@ -81,7 +81,7 @@ function createCustomTable(elid, level, sensortype, station, timeunit, chartID){
       }
       
       // set output to HTML DOM
-      setChart(chartID, c, unitName);
+      setChart(chartID, c, unitName, unit);
       setOutput(elid,actualtable);
       console.log("Output van actualtable:", elid, level, sensortype, station, timeunit);
       console.log("Full URL:", fullURL);
@@ -89,7 +89,7 @@ function createCustomTable(elid, level, sensortype, station, timeunit, chartID){
 }
 
 // create chart
-function setChart(id, data, unitName) {
+function setChart(id, data, unitName, unit) {
   
     // set color lines
     if (unitName == "temp"){
@@ -107,11 +107,12 @@ function setChart(id, data, unitName) {
         data: [],
         xkey: 'time',
         ykeys: ['unitName'],
+        postUnits: unit,
         lineColors: [lineColor],
         labels: [unitName],
-        gridEnabled: false,
+        grid: true,
         parseTime: false,
-        resize: true
+        resize: true,
     });
     
     chart.setData(data);
@@ -147,6 +148,7 @@ function toggled() {
       $(".home").show();
       createCustomTable("currenttemp", "9", "temp", "station", "all", "homeChartTemp");
       createCustomTable("currenthumid", "9", "humid", "station", "all", "homeChartHumid");
+      toggled();
     });
     
     // load maintenance page after click
