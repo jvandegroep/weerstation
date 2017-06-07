@@ -123,6 +123,15 @@ function setOutput(id,value){
   el.innerHTML = value;
 }
 
+// toggle navbar when collapsed
+function toggled() {
+  var expanded = $("#myNavbar").attr('aria-expanded')
+  if (expanded == "true") {
+    $('.navbar-toggle').click();
+    console.log("toggled, aria-expanded was: ", expanded);
+  }
+}
+
 // Load charts when document is ready
   $(document).ready(function() {
     
@@ -136,7 +145,6 @@ function setOutput(id,value){
     $("#hrefHome").click(function(){
       $(".page").hide();
       $(".home").show();
-      curView = ".home";
       createCustomTable("currenttemp", "9", "temp", "station", "all", "homeChartTemp");
       createCustomTable("currenthumid", "9", "humid", "station", "all", "homeChartHumid");
     });
@@ -145,12 +153,14 @@ function setOutput(id,value){
     $("#hrefMaintenance").click(function(){
       $(".page").hide();
       $(".maint").show();
+      toggled();
     });
     
     // load about page after click
     $("#hrefAbout").click(function(){
       $(".page").hide();
       $(".about").show();
+      toggled();
     });
 });
 

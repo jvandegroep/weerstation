@@ -17,6 +17,16 @@
   font-weight: 400;
 }
 
+html {
+  position: relative;
+  min-height: 100%;
+  font-family: "-apple-system","system-ui","BlinkMacSystemFont","Segoe UI","Roboto","Helvetica Neue","Arial","sans-serif";
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 40px;
+  font-family: "-apple-system","system-ui","BlinkMacSystemFont","Segoe UI","Roboto","Helvetica Neue","Arial","sans-serif";
+}
 .footer {
   position: absolute;
   bottom: 0;
@@ -32,10 +42,6 @@
 
 .navbar {
   margin-bottom: 0px;
-}
-
-body {
-  font-family: "-apple-system","system-ui","BlinkMacSystemFont","Segoe UI","Roboto","Helvetica Neue","Arial","sans-serif";
 }
 
 table {
