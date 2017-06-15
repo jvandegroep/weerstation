@@ -118,6 +118,41 @@ function setChart(id, data, unitName, unit) {
     chart.setData(data);
 }
 
+// get station alias
+function getAlias() {
+  getData(DBURL, function(res){
+    var table = "";
+    
+    // load dummy data if res is empty
+    if (!res){
+      
+      console.log("could not load alias data, loading dummy data");
+      
+      // create dummy table
+      table = "<tr>" + "<td>" + "station1" + "</td>" + "<td>" + "</td>" + "</tr>";
+      table = table + "<tr>" + "<td>" + "station2" + "</td>" + "<td>" + "</td>" + "</tr>"
+      table = table + "<tr>" + "<td>" + "station3" + "</td>" + "<td>" + "</td>" + "</tr>"
+      
+    } else {
+      
+      // parse response
+      var a = JSON.parse(res);
+      
+      // iterate to response and contruct table.
+      for (var i=0; i<a.rows.length; i++) {
+        var row = a.rows[i];
+        table = table + "<tr>" + "<td>" + row.key + "</td>" + "<td>" + row.value.alias + "</td>" + "</tr>";
+        
+      }
+    }
+    
+    // output table to element
+    setOutput("aliasTable", table)
+    
+  });
+  
+}
+
 // Set innerHTMl value of elementByID
 function setOutput(id,value){
   var el = document.getElementById(id);
@@ -156,6 +191,7 @@ function toggled() {
       $(".page").hide();
       $(".maint").show();
       toggled();
+      getAlias();
     });
     
     // load about page after click
