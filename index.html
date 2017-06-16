@@ -19,6 +19,7 @@
   <!-- Local -->
   <link rel="stylesheet" type="text/css" href="./css/style.css">
   <script src="./js/script.js"></script>
+  <script src="./src/moment.js"></script>
   
 </head>
 <body>
@@ -36,19 +37,11 @@
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
           <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Temperatuur <span class="caret"></span></a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Temperatuur & Luchtvochtigheid <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#" id="tempWeek">laatste 7 dagen</a></li>
-              <li><a href="#" id="tempMonth">laatste maand</a></li>
-              <li><a href="#" id="tempYear">laatste 12 maanden</a></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Luchtvochtigheid <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#" id="humidWeek" >laatste 7 dagen</a></li>
-              <li><a href="#" id="humidMonth">laatste maand</a></li>
-              <li><a href="#" id="humidYear">laatste 12 maanden</a></li>
+              <li><a href="#" id="hrefWeek" >laatste 7 dagen</a></li>
+              <li><a href="#" id="hrefMonth">laatste maand</a></li>
+              <li><a href="#" id="hrefYear">laatste 12 maanden</a></li>
             </ul>
           </li>
           <li><a href="#" id="hrefMaintenance">Onderhoud</a></li>
@@ -61,13 +54,13 @@
     </div>
   </nav>
 
-
+  <!-- jumbotron page -->
   <div class="jumbotron customJumboBG">
     <h1 class="display-3" id="hoofdtitel"> Weerstation Wilde Zwaan</h1>
     <p class="lead"> Temperatuur & luchtvochtigheid metingen</p>
   </div>
 
-
+  <!-- Home page -->
   <div class="container-fluid page home">
     <div class="row">
       <div class="col-sm-1"></div>
@@ -93,23 +86,37 @@
     </div>
   </div>
   
+  <!-- Week page -->
+  <div class="container-fluid page weeksum">
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-11">
+        <h2 > Weekoverzicht </h2>
+        <h5 id="vanafWeek"></h5>
+        <p id="weekChart"></p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Onderhouds page -->
   <div class="container-fluid page maint">
     <div class="row">
       <div class="col-sm-1"></div>
       <div class="col-sm-11">
         <h2> onderhoudspagina </h2>
         <br />
-        <h5>Wijzig alias naam van station</h5>
+        <h5>Selecteer en wijzig een alias van station</h5>
         <br />
         <table id="aliasTable"></table>
         <br />
         <input type="text" id="aliasInput" readonly placeholder="Click Alias"/>
-        <input type="text" id="newAlias" placeholder="Nieuwe naam"/>
+        <input type="text" id="newAlias" placeholder="Nieuwe alias naam"/>
         <button id="changeAlias">Wijzig</button>
       </div>
     </div>
   </div>
   
+  <!-- OverOns page -->
   <div class="container-fluid page about">
     <div class="row">
       <div class="col-sm-1"></div>
@@ -119,6 +126,7 @@
     </div>
   </div>
 
+  <!-- Footer page -->
   <footer class="footer">
     <div class="container footerTXT">
       <p class="text-muted"> Jacob van de Groep | 2017 | Copyright </p>
