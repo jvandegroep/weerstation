@@ -1,7 +1,7 @@
 // Static variables
-var DBHOST = "10.0.75.1";
+var DBHOST = "192.168.178.2";
 var DBPORT = "5984";
-var DBURL = "https://" + DBHOST + ":" + DBPORT + "/data/_design/measurements/_view/byhour";
+var DBURL = "http://" + DBHOST + ":" + DBPORT + "/weerdb/_design/measurements/_view/byhour";
 
 
 // Get DB data from url and send back data
@@ -53,7 +53,8 @@ function createCustomTable(elid, level, sensortype, station, timeunit, chartID){
             {"key":["temp",2016,7,13,14,29,"station2",1468420180000],"value":{"sum":27,"count":1,"min":27,"max":27,"sumsqr":729}},
             {"key":["temp",2016,7,13,15,16,"station1",1468423000000],"value":{"sum":30,"count":1,"min":30,"max":30,"sumsqr":900}},
             {"key":["temp",2016,7,13,17,15,"station2",1468430140000],"value":{"sum":25,"count":1,"min":25,"max":25,"sumsqr":625}},
-            {"key":["temp",2016,9,14,10,31,"station3",1473849100000],"value":{"sum":98,"count":1,"min":98,"max":26,"sumsqr":9604}},            ]});
+            {"key":["temp",2016,9,14,10,31,"station3",1473849100000],"value":{"sum":98,"count":1,"min":98,"max":26,"sumsqr":9604}},            
+            ]});
       }
       
      if (!res && JSON.stringify(fullURL).indexOf('humid') >= 0){
