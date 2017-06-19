@@ -1,7 +1,7 @@
 // Static variables
 var DBHOST = "192.168.178.2";
 var DBPORT = "5984";
-var DBURL = "http://" + DBHOST + ":" + DBPORT + "/weerdb/_design/measurements/_view/byhour";
+var DBURL = "https://" + DBHOST + ":" + DBPORT + "/weerdb/_design/measurements/_view/byhour";
 
 
 // Get DB data from url and send back data
@@ -75,7 +75,7 @@ function createCustomTable(elid, level, sensortype, station, timeunit, chartID){
       var c = [];
       for (var i = 0; i < a.rows.length; i++) {
           var row = a.rows[i];
-          var epoch = row.key[7] + 172800000;
+          var epoch = row.key[2] + 172800000;
           var timestamp = new Date(epoch).toLocaleString();
           actualtable = actualtable + "<tr>" + "<td>" + timestamp + "</td>" + "<td>" + row.value.max + unit + "</td>" + "<td>" + row.key[6] + "</td>" + "</tr>";
           c.push({ time: timestamp, unitName: row.value.max});
@@ -163,7 +163,7 @@ function setChartOverview(chartId, station, level, timeunit) {
       for (var i = 0; i < a.rows.length; i++) {
           var row = a.rows[i];
           var unitName = row.key[0];
-          var epoch = row.key[7] + 172800000;
+          var epoch = row.key[2] + 172800000;
           var timestamp = new Date(epoch).toLocaleString();
           data.push({ time: timestamp, temp: row.value.max, humid: 75});
           console.log("time: ", timestamp, " unitName: ", unitName, " value: ", row.value.max );
@@ -261,15 +261,15 @@ function toggled() {
     // load home page initially
     $(".page").hide();
     $(".home").show();
-    createCustomTable("currenttemp", "9", "temp", "station", "all", "homeChartTemp");
-    createCustomTable("currenthumid", "9", "humid", "station", "all", "homeChartHumid");
+    createCustomTable("currenttemp", "9", "temp", "station", "10min", "homeChartTemp");
+    createCustomTable("currenthumid", "9", "humid", "station", "day", "homeChartHumid");
     
     // load home page after click
     $("#hrefHome").click(function(){
       $(".page").hide();
       $(".home").show();
-      createCustomTable("currenttemp", "9", "temp", "station", "all", "homeChartTemp");
-      createCustomTable("currenthumid", "9", "humid", "station", "all", "homeChartHumid");
+      createCustomTable("currenttemp", "9", "temp", "station", "10min", "homeChartTemp");
+      createCustomTable("currenthumid", "9", "humid", "station", "day", "homeChartHumid");
       toggled();
     });
     
@@ -293,7 +293,7 @@ function toggled() {
       $(".page").hide();
       $(".weeksum").show();
       setVanaf("week", "vanafWeek");
-      setChartOverview("weekChart", "station", "9", "all");
+      setChartOverview("weekChart", "station", "9", "week");
       toggled();
     });
     
