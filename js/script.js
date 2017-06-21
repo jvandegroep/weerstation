@@ -1,7 +1,7 @@
 // Static variables
 var DBHOST = "192.168.178.2";
 var DBPORT = "5984";
-var DBURL = "https://" + DBHOST + ":" + DBPORT + "/weerdb/_design/measurements/_view/byhour";
+var DBURL = "https://" + DBHOST + ":" + DBPORT + "/weerdb/_design/measurements/_view/";
 
 
 // Get DB data from url and send back data
@@ -30,7 +30,7 @@ function getData(url,res){
 }
 
 // Create specific table and size
-function createCustomTable(elid, level, sensortype, station, timeunit, chartID){
+function createCustomTable(elid, level, sensortype, station, timeunit, chartID, view){
   var d=new Date();
   var startparams;
   if (arguments[4] == "10min") {startparams=[sensortype, station, "timestamphere", d.getUTCFullYear(),d.getUTCMonth()+1,d.getUTCDate(),d.getUTCHours()+2, d.getUTCMinutes()-10, station];}
@@ -44,7 +44,7 @@ function createCustomTable(elid, level, sensortype, station, timeunit, chartID){
 	var endparams=[sensortype,{}];
   var unit = "";
   var unitName = arguments[2];
-	var fullURL=DBURL+'?group_level=' + level + '&startkey='+ JSON.stringify(startparams)+'&endkey='+JSON.stringify(endparams);
+	var fullURL=DBURL+ view +'?group_level=' + level + '&startkey='+ JSON.stringify(startparams)+'&endkey='+JSON.stringify(endparams);
   if (arguments[2] == "temp") {unit = " ℃";} else {unit = " %";}
   console.log("argument[2]=", unit, "startparams=", startparams);
   getData(fullURL, function (res){
@@ -53,25 +53,13 @@ function createCustomTable(elid, level, sensortype, station, timeunit, chartID){
       if (!res && JSON.stringify(fullURL).indexOf('temp') >= 0){
         console.log("loading temp dummy data..");
         
-        res = JSON.stringify({"rows":[
-            {"key":["temp","station1",1458420160000,2016,3,19,20,1],"value":{"sum":99,"count":1,"min":99,"max":20,"sumsqr":9801}},
-            {"key":["temp","station2",1468420180000,2016,7,13,14,29],"value":{"sum":27,"count":1,"min":27,"max":27,"sumsqr":729}},
-            {"key":["temp","station1",1468423000000,2016,7,13,15,16],"value":{"sum":30,"count":1,"min":30,"max":30,"sumsqr":900}},
-            {"key":["temp","station2",1468430140000,2016,7,13,17,15],"value":{"sum":25,"count":1,"min":25,"max":25,"sumsqr":625}},
-            {"key":["temp","station3",1473849100000,2016,9,14,10,31],"value":{"sum":98,"count":1,"min":98,"max":26,"sumsqr":9604}},            
-            ]});
+        res = JSON.stringify(dummy10minTemp);
       }
       
      if (!res && JSON.stringify(fullURL).indexOf('humid') >= 0){
         console.log("loading humid dummy data..");
         
-        res = JSON.stringify({"rows":[
-            {"key":["humid","station1",1458420160000,2016,3,19,20,42],"value":{"sum":99,"count":1,"min":99,"max":60,"sumsqr":9801}},
-            {"key":["humid","station2",1468420180000,2016,7,13,14,29],"value":{"sum":68,"count":1,"min":68,"max":68,"sumsqr":4624}},
-            {"key":["humid","station1",1468423000000,2016,7,13,15,16],"value":{"sum":70,"count":1,"min":70,"max":70,"sumsqr":4900}},
-            {"key":["humid","station2",1468430140000,2016,7,13,17,15],"value":{"sum":65,"count":1,"min":65,"max":65,"sumsqr":4225}},
-            {"key":["humid","station3",1473849100000,2016,9,14,10,31],"value":{"sum":98,"count":1,"min":98,"max":75,"sumsqr":9604}}
-            ]});
+        res = JSON.stringify(dummy10minHumid);
       }
       
       // create table
@@ -127,41 +115,49 @@ function setChart(id, data, unitName, unit) {
 }
 
 // create overview chart
-function setChartOverview(chartId, station, level, timeunit) {
-  var d=new Date();
+ // example: setChartOverview("weekChart", "station1", "6", "lastweek");
+ 
+function setChartOverview(chartId, station, level, view, unitName) {
+  
   var startparams;
-  if (arguments[3] == "10min") {startparams=[d.getUTCFullYear(),d.getUTCMonth()+1,d.getUTCDate(),d.getUTCHours()+2, d.getUTCMinutes()-10, station];}
-  if (arguments[3] == "hour") {startparams=[d.getUTCFullYear(),d.getUTCMonth()+1,d.getUTCDate(),d.getUTCHours()+1, d.getUTCMinutes(), station];}
-  if (arguments[3] == "day") {startparams=[d.getUTCFullYear(),d.getUTCMonth()+1,d.getUTCDate()-1,d.getUTCHours()+2, d.getUTCMinutes(), station];}
-  if (arguments[3] == "week") {startparams=[d.getUTCFullYear(),d.getUTCMonth()+1,d.getUTCDate(),d.getUTCHours()+2, d.getUTCMinutes(), station];}
-  if (arguments[3] == "month") {startparams=[d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate(),d.getUTCHours()+2, d.getUTCMinutes(), station];}
-  if (arguments[3] == "year") {startparams=[d.getUTCFullYear()-1,d.getUTCMonth()+1,d.getUTCDate(),d.getUTCHours()+2, d.getUTCMinutes(), station];}
-  if (arguments[3] == "all") {startparams=[d.getUTCFullYear()-10,d.getUTCMonth()+1,d.getUTCDate(),d.getUTCHours()+2, d.getUTCMinutes(), station];}
+  if (view == "10min") {startparams=[unitName, station]; view = "last10min";}
+  if (view == "lasthour") {startparams=[unitName,station]; view = "lasthour";}
+  if (view == "lastday") {startparams=[unitName,station]; view = "lastday";}
+  if (view == "lastweek") {startparams=[unitName,station]; view = "lastweek";}
+  if (view == "lastmonth") {startparams=[unitName,station]; view = "lastmonth";}
+  if (view == "lastyear") {startparams=[unitName,station]; view = "lastyear";}
+  if (view == "all") {startparams=[unitName,station]; view = "all";}
+  
 
-	var endparams=[{}];
-	var fullURL=DBURL+'?group_level=' + level + '&startkey='+ JSON.stringify(startparams)+'&endkey='+JSON.stringify(endparams);
+	var endparams=[unitName,{}];
+	var fullURL=DBURL+ view +'?group_level=' + level + '&startkey='+ JSON.stringify(startparams)+'&endkey='+JSON.stringify(endparams);
 
   console.log("startparams=", startparams);
   getData(fullURL, function (res){
 
       // loading dummy data
       if (!res){
-        console.log("loading dummy data..");
+        console.log("loading dummy data");
         
+        if (fullURL.includes("temp")) { 
+          var unit = " ℃";
+          if (fullURL.includes("week")) {
+              res = JSON.stringify(dummyWeekTemp);
+          }
+          if (fullURL.includes("month")) {
+              res = JSON.stringify(dummyMonthTemp);
+          }
+        }
         
-        //RESPSONSE AANPASSEN ZODAT HUMID EN TEMP IN ÉÉN RESPONSE ZITTEN, DAARNA IN DATA PUSH BEIDE VALUES OPNEMEN
-        res = JSON.stringify({"rows":[
-            {"key":["temp","station1",1458420160000,2016,3,19,20,42],"value":{"sum":99,"count":1,"min":99,"max":20,"sumsqr":9801}},
-            {"key":["temp","station2",1468420180000,2016,7,13,14,29],"value":{"sum":27,"count":1,"min":27,"max":27,"sumsqr":729}},
-            {"key":["temp","station1",1468423000000,2016,7,13,15,16],"value":{"sum":30,"count":1,"min":30,"max":30,"sumsqr":900}},
-            {"key":["temp","station2",1468430140000,2016,7,13,17,15],"value":{"sum":25,"count":1,"min":25,"max":25,"sumsqr":625}},
-            {"key":["temp","station3",1473849100000,2016,9,14,10,31],"value":{"sum":98,"count":1,"min":98,"max":26,"sumsqr":9604}},
-            {"key":["humid","station1",1458420160000,2016,3,19,20,42],"value":{"sum":99,"count":1,"min":99,"max":60,"sumsqr":9801}},
-            {"key":["humid","station2",1468420180000,2016,7,13,14,29],"value":{"sum":68,"count":1,"min":68,"max":68,"sumsqr":4624}},
-            {"key":["humid","station1",1468423000000,2016,7,13,15,16],"value":{"sum":70,"count":1,"min":70,"max":70,"sumsqr":4900}},
-            {"key":["humid","station1",1468423000000,2016,7,13,17,15,"station2",1468430140000],"value":{"sum":65,"count":1,"min":65,"max":65,"sumsqr":4225}},
-            {"key":["humid","station3",1473849100000,2016,9,14,10,31],"value":{"sum":98,"count":1,"min":98,"max":75,"sumsqr":9604}}
-            ]});
+        if (fullURL.includes("humid")) { 
+          var unit = " %";
+          if (fullURL.includes("week")) {
+              res = JSON.stringify(dummyWeekHumid);
+          }
+          if (fullURL.includes("month")) {
+              res = JSON.stringify(dummyMonthHumid);
+          }
+        }
       }
       
       var a = JSON.parse(res);
@@ -169,9 +165,23 @@ function setChartOverview(chartId, station, level, timeunit) {
       for (var i = 0; i < a.rows.length; i++) {
           var row = a.rows[i];
           var unitName = row.key[0];
-          var epoch = row.key[2] + 172800000;
-          var timestamp = new Date(epoch).toLocaleString();
-          data.push({ time: timestamp, temp: row.value.max, humid: 75});
+          
+          // building the datetime string
+          if (row.key[3] < 10 ) {row.key[3] = "0" + row.key[3]}; // add extra 0 before the month for creating a proper timestring
+          if (fullURL.includes("month")) {
+              var hours = "T00:00:00";
+              var timestring = row.key[2] + "-" + row.key[3] + "-" + row.key[4];
+              var timestamp = (new Date(timestring)).toLocaleDateString();
+          }
+          if (fullURL.includes("week")) {
+              if (row.key[5] < 10 ) {row.key[5] = "0" + row.key[5]}; // add extra 0 before the hour for creating a proper timestring
+              var timestring = row.key[2] + "-" + row.key[3] + "-" + row.key[4] + "T" + row.key[5] + ":" + "00" + ":" + "00";
+              var timestamp = (new Date(timestring)).toLocaleString();
+          }
+          
+          // push values to chart array
+          if (unitName === "temp") {data.push({ time: timestamp, temp: row.value.max});};
+          if (unitName === "humid") {data.push({ time: timestamp, humid: row.value.max});};
           console.log("time: ", timestamp, " unitName: ", unitName, " value: ", row.value.max );
       }
       
@@ -180,15 +190,22 @@ function setChartOverview(chartId, station, level, timeunit) {
       // empty current element
       setOutput(chartId, "");
       
+      // set color lines
+      if (unitName == "temp"){
+          var lineColor = "red";
+      } else {
+          lineColor = "#42a4f4";
+      }
+        
       // homeChart settings
       var chart = new Morris.Line({
           element: chartId,
           data: data,
           xkey: 'time',
-          ykeys: ['temp', 'humid'],
-          //postUnits: ['C','%'],
-          lineColors: ['red', '#42a4f4'],
-          labels: ['temp', 'humid'],
+          ykeys: [unitName],
+          postUnits: unit,
+          lineColors: [lineColor],
+          labels: [unitName],
           grid: true,
           parseTime: false,
           resize: true,
@@ -233,14 +250,13 @@ function getAlias() {
 function setVanaf(vanaf, elid) {
   
   if (vanaf == "week"){
-      var d = "vanaf " + moment().subtract(7, 'days').calendar();
-      console.log("vanaf tijd: ", d);
+      var d = "vanaf " + moment().subtract(7, 'days').calendar() + ", max waarde per uur";
   }
   if (vanaf == "maand"){
-      var d = moment().subtract(1, 'months').calendar();
+      var d = "vanaf " + moment().subtract(1, 'months').calendar() + ", max waarde per dag";
   }
   if (vanaf == "jaar"){
-      var d = moment().subtract(1, 'years').calendar();
+      var d = "vanaf " + moment().subtract(1, 'years').calendar() + ", max waarde per maand";
   }
   
   setOutput(elid,d);
@@ -267,15 +283,15 @@ function toggled() {
     // load home page initially
     $(".page").hide();
     $(".home").show();
-    createCustomTable("currenttemp", "9", "temp", "station", "10min", "homeChartTemp");
-    createCustomTable("currenthumid", "9", "humid", "station", "10min", "homeChartHumid");
+    createCustomTable("currenttemp", "9", "temp", "station1", "10min", "homeChartTemp", "last10min");
+    createCustomTable("currenthumid", "9", "humid", "station1", "10min", "homeChartHumid", "last10min");
     
     // load home page after click
     $("#hrefHome").click(function(){
       $(".page").hide();
       $(".home").show();
-      createCustomTable("currenttemp", "9", "temp", "station", "10min", "homeChartTemp");
-      createCustomTable("currenthumid", "9", "humid", "station", "10min", "homeChartHumid");
+      createCustomTable("currenttemp", "9", "temp", "station1", "10min", "homeChartTemp", "last10min");
+      createCustomTable("currenthumid", "9", "humid", "station1", "10min", "homeChartHumid", "last10min");
       toggled();
     });
     
@@ -294,12 +310,23 @@ function toggled() {
       toggled();
     });
     
-    // load about page after click
+    // load week page after click
     $("#hrefWeek").click(function(){
       $(".page").hide();
       $(".weeksum").show();
       setVanaf("week", "vanafWeek");
-      setChartOverview("weekChart", "station", "9", "week");
+      setChartOverview("weekChartTemp", "station1", "6", "lastweek", "temp");
+      setChartOverview("weekChartHumid", "station1", "6", "lastweek", "humid");
+      toggled();
+    });
+    
+    // load maand page after click
+    $("#hrefMonth").click(function(){
+      $(".page").hide();
+      $(".maandsum").show();
+      setVanaf("maand", "vanafMaand");
+      setChartOverview("maandChartTemp", "station1", "5", "lastmonth", "temp");
+      setChartOverview("maandChartHumid", "station1", "5", "lastmonth", "humid");
       toggled();
     });
     

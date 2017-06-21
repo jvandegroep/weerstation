@@ -19,6 +19,7 @@
   <!-- Local -->
   <link rel="stylesheet" type="text/css" href="./css/style.css">
   <script src="./js/script.js"></script>
+  <script src="./js/dummydata.js"></script>
   <script src="./src/moment.js"></script>
   
 </head>
@@ -90,11 +91,33 @@
   <div class="container-fluid page weeksum">
     <div class="row">
       <div class="col-sm-1"></div>
-      <div class="col-sm-11">
+      <div class="col-sm-10">
         <h2 > Weekoverzicht </h2>
         <h5 id="vanafWeek"></h5>
-        <p id="weekChart"></p>
+        <br />
+        <h5>Temperatuur</h5>
+        <p id="weekChartTemp"></p>
+        <h5>Luchtvochtigheid</h5>
+        <p id="weekChartHumid"></p>
       </div>
+      <div class="col-sm-1"></div>
+    </div>
+  </div>
+  
+    <!-- Month page -->
+  <div class="container-fluid page maandsum">
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-10">
+        <h2 > Maandoverzicht </h2>
+        <h5 id="vanafMaand"></h5>
+        <br />
+        <h5>Temperatuur</h5>
+        <p id="maandChartTemp"></p>
+        <h5>Luchtvochtigheid</h5>
+        <p id="maandChartHumid"></p>
+      </div>
+      <div class="col-sm-1"></div>
     </div>
   </div>
   
