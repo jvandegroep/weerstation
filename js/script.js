@@ -17,9 +17,9 @@ function getData(url,res){
     }
   };
   xhttp.open("GET", url, true);
-  xhttp.timeout = 100; // time in milliseconds
+  xhttp.timeout = 2000; // time in milliseconds
   xhttp.ontimeout = function(e) {
-    console.error("Timeout, cannot contact ", DBURL);
+    console.error("Timeout, cannot contact ", url);
     res("");
   };
   xhttp.onerror = function () {
@@ -33,13 +33,13 @@ function getData(url,res){
 function createCustomTable(elid, level, sensortype, station, timeunit, chartID, view){
   var d=new Date();
   var startparams;
-  if (arguments[4] == "10min") {startparams=[sensortype, station, "timestamphere", d.getUTCFullYear(),d.getUTCMonth()+1,d.getUTCDate(),d.getUTCHours()+2, d.getUTCMinutes()-10, station];}
-  if (arguments[4] == "hour") {startparams=[sensortype, d.getUTCFullYear(),d.getUTCMonth()+1,d.getUTCDate(),d.getUTCHours()+1, d.getUTCMinutes(), station];}
-  if (arguments[4] == "day") {startparams=[sensortype, d.getUTCFullYear(),d.getUTCMonth()+1,d.getUTCDate()-1,d.getUTCHours()+2, d.getUTCMinutes(), station];}
-  if (arguments[4] == "week") {startparams=[sensortype, d.getUTCFullYear(),d.getUTCMonth()+1,d.getUTCDate(),d.getUTCHours()+2, d.getUTCMinutes(), station];}
-  if (arguments[4] == "month") {startparams=[sensortype, d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate(),d.getUTCHours()+2, d.getUTCMinutes(), station];}
-  if (arguments[4] == "year") {startparams=[sensortype, d.getUTCFullYear()-1,d.getUTCMonth()+1,d.getUTCDate(),d.getUTCHours()+2, d.getUTCMinutes(), station];}
-  if (arguments[4] == "all") {startparams=[sensortype, d.getUTCFullYear()-10,d.getUTCMonth()+1,d.getUTCDate(),d.getUTCHours()+2, d.getUTCMinutes(), station];}
+  if (view == "10min") {startparams=[unitName, station]; view = "last10min";}
+  if (view == "lasthour") {startparams=[unitName,station]; view = "lasthour";}
+  if (view == "lastday") {startparams=[unitName,station]; view = "lastday";}
+  if (view == "lastweek") {startparams=[unitName,station]; view = "lastweek";}
+  if (view == "lastmonth") {startparams=[unitName,station]; view = "lastmonth";}
+  if (view == "lastyear") {startparams=[unitName,station]; view = "lastyear";}
+  if (view == "all") {startparams=[unitName,station]; view = "all";}
 
 	var endparams=[sensortype,{}];
   var unit = "";
@@ -68,9 +68,11 @@ function createCustomTable(elid, level, sensortype, station, timeunit, chartID, 
       var c = [];
       for (var i = 0; i < a.rows.length; i++) {
           var row = a.rows[i];
-          var epoch = row.key[2] + 172800000;
-          var timestamp = new Date(epoch).toLocaleString();
-          actualtable = actualtable + "<tr>" + "<td>" + timestamp + "</td>" + "<td>" + row.value.max + unit + "</td>" + "<td>" + row.key[6] + "</td>" + "</tr>";
+          var d = new Date(row.key[7]);
+          var back = (d.getTimezoneOffset())*60*1000;
+          var t = d.getTime() + back;
+          var timestamp = new Date(t).toLocaleString();
+          actualtable = actualtable + "<tr>" + "<td>" + timestamp + "</td>" + "<td>" + row.value.max + unit + "</td>" + "<td>" + row.key[1] + "</td>" + "</tr>";
           c.push({ time: timestamp, unitName: row.value.max});
       }
       
@@ -182,7 +184,6 @@ function setChartOverview(chartId, station, level, view, unitName) {
           // push values to chart array
           if (unitName === "temp") {data.push({ time: timestamp, temp: row.value.max});};
           if (unitName === "humid") {data.push({ time: timestamp, humid: row.value.max});};
-          console.log("time: ", timestamp, " unitName: ", unitName, " value: ", row.value.max );
       }
       
       // create chart
