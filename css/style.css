@@ -17,6 +17,16 @@
   font-weight: 400;
 }
 
+#currentTemp {
+  font-size: 300%;
+  font-weight: 100;
+}
+
+#currentHumid {
+  font-size: 300%;
+  font-weight: 100;
+}
+
 html {
   position: relative;
   min-height: 100%;
