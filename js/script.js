@@ -38,30 +38,24 @@ function nowReading(elid, station, unitName) {
 	var fullURL="https://" + DBHOST + ":" + DBPORT + "/weerdb/" + "_all_docs?limit=1&include_docs=true&descending=true";
 	
   if (unitName == "temp") {var unit = " Celsius";} else { unit = " %";}1;
-  console.log("unit=", unit, "startparams=", startparams);
+  console.log("nowReading - unit=", unit, "startparams=", startparams);
   
   // Get request
   getData(fullURL, function (res){
 
       // loading dummy data in case of no response
-      if (!res && JSON.stringify(fullURL).indexOf('temp') >= 0){
+      if (!res ){
         console.log("loading temp dummy data..");
         
-        res = JSON.stringify(dummyNowTemp);
+        res = JSON.stringify(dummyNow);
       }
       
-      if (!res && JSON.stringify(fullURL).indexOf('humid') >= 0){
-        console.log("loading humid dummy data..");
-        
-        res = JSON.stringify(dummyNowHumid);
-      }
       
       var a = JSON.parse(res);
       var row = a.rows[0];
       if (unitName == "temp") {var measurement = row.doc.temp;} else {measurement = row.doc.humid;}
       var epoch = (row.doc.timestamp)*1000;
       var d = new Date(epoch);
-      console.log(epoch);
       var back = (d.getTimezoneOffset())*60*1000;
       var t = d.getTime() + back;
       var timestamp = new Date(t).toLocaleString();
@@ -80,7 +74,7 @@ function setHomeChart(level, unitName, station, chartID, view){
 	var endparams=[unitName,{}];
 	var fullURL=DBURL+ view +'?group_level=' + level + '&startkey='+ JSON.stringify(startparams)+'&endkey='+JSON.stringify(endparams);
   if (unitName == "temp") {var unit = " ℃";} else { unit = " %";}1;
-  console.log("unit=", unit, "startparams=", startparams);
+  console.log("setHomeChart - unit=", unit, "startparams=", startparams);
   
   // Get request
   getData(fullURL, function (res){
@@ -145,7 +139,7 @@ function setChartOverview(chartId, station, level, view, unitName) {
 	var endparams=[unitName,{}];
 	var fullURL=DBURL+ view +'?group_level=' + level + '&startkey='+ JSON.stringify(startparams)+'&endkey='+JSON.stringify(endparams);
 
-  console.log("startparams=", startparams);
+  console.log("setChartOverview - startparams=", startparams);
   getData(fullURL, function (res){
 
       // loading dummy data
@@ -284,7 +278,6 @@ function toggled() {
   var expanded = $("#myNavbar").attr('aria-expanded')
   if (expanded == "true") {
     $('.navbar-toggle').click();
-    console.log("toggled, aria-expanded was: ", expanded);
   }
 }
 

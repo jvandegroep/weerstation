@@ -219,12 +219,8 @@ var dummyMonthHumid = {"rows":[
           {"key":["humid","station1",2017,6,21],"value":{"sum":31672.400000000001455,"count":802,"min":37.899999999999998579,"max":41.200000000000002842,"sumsqr":1251050.839999999851}}
           ]};
 
-var dummyNowTemp = {"rows":[
-          {"key":["temp","station1",2017,6,21,14,34,1498055640000],"value":{"sum":28,"count":1,"min":28,"max":28,"sumsqr":784}}
-          ]};
-
-var dummyNowHumid = {"rows":[
-          {"key":["humid","station1",2017,6,21,14,34,1498055762000],"value":{"sum":40.200000000000002842,"count":1,"min":40.200000000000002842,"max":40.200000000000002842,"sumsqr":1616.040000000000191}}
+var dummyNow = {"total_rows":7121,"offset":0,"rows":[
+          {"id":"c121653f72ed3f9adf6b7e079e583107","key":"c121653f72ed3f9adf6b7e079e583107","value":{"rev":"1-4e4b1e0c6b9ed6d53cb88f70df004f08"},"doc":{"_id":"c121653f72ed3f9adf6b7e079e583107","_rev":"1-4e4b1e0c6b9ed6d53cb88f70df004f08","humid":46.100000000000001421,"source":"station1","temp":27.800000000000000711,"timestamp":1498171142}}
           ]};
           
 var dummyDayHumid = {"rows":[
