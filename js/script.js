@@ -35,7 +35,8 @@ function getData(url,res){
 function nowReading(elid, station, unitName) {
   var startparams=[unitName, station];
 	var endparams=[unitName,{}];
-	var fullURL=DBURL+ "all" + '&startkey='+ JSON.stringify(startparams)+'&endkey='+JSON.stringify(endparams) + "&limit=1" + "&descending=true";
+	var fullURL="https://" + DBHOST + ":" + DBPORT + "/weerdb/" + "_all_docs?limit=1&include_docs=true&descending=true";
+	
   if (unitName == "temp") {var unit = " Celsius";} else { unit = " %";}1;
   console.log("unit=", unit, "startparams=", startparams);
   
@@ -57,9 +58,10 @@ function nowReading(elid, station, unitName) {
       
       var a = JSON.parse(res);
       var row = a.rows[0];
-      var measurement = row.value.max;
-      var d = new Date(row.key[7]);
-      console.log(row.key[7]);
+      if (unitName == "temp") {var measurement = row.doc.temp;} else {measurement = row.doc.humid;}
+      var epoch = (row.doc.timestamp)*1000;
+      var d = new Date(epoch);
+      console.log(epoch);
       var back = (d.getTimezoneOffset())*60*1000;
       var t = d.getTime() + back;
       var timestamp = new Date(t).toLocaleString();
@@ -72,7 +74,7 @@ function nowReading(elid, station, unitName) {
 
 
 // CREATE HOME CHART
-// Example: setHomeChart("9", "temp", "station1", "homeChartTemp", "lastday");
+// Example: setHomeChart("6", "temp", "station1", "homeChartTemp", "lastday");
 function setHomeChart(level, unitName, station, chartID, view){
   var startparams=[unitName, station];
 	var endparams=[unitName,{}];
@@ -87,13 +89,13 @@ function setHomeChart(level, unitName, station, chartID, view){
       if (!res && JSON.stringify(fullURL).indexOf('temp') >= 0){
         console.log("loading temp dummy data..");
         
-        res = JSON.stringify(dummy10minTemp);
+        res = JSON.stringify(dummyDayTemp);
       }
       
      if (!res && JSON.stringify(fullURL).indexOf('humid') >= 0){
         console.log("loading humid dummy data..");
         
-        res = JSON.stringify(dummy10minHumid);
+        res = JSON.stringify(dummyDayHumid);
       }
       
       // push data to chart array
@@ -101,10 +103,10 @@ function setHomeChart(level, unitName, station, chartID, view){
       var data = [];
       for (var i = 0; i < a.rows.length; i++) {
           var row = a.rows[i];
-          var d = new Date(row.key[7]);
-          var back = (d.getTimezoneOffset())*60*1000;
-          var t = d.getTime() + back;
-          var timestamp = new Date(t).toLocaleString();
+          if (row.key[3] < 10 ) {row.key[3] = "0" + row.key[3]}; // add extra 0 before the month for creating a proper timestring
+          if (row.key[5] < 10 ) {row.key[5] = "0" + row.key[5]} // add extra 0 before the hour for creating a proper timestring
+              var timestring = row.key[2] + "-" + row.key[3] + "-" + row.key[4] + "T" + row.key[5] + ":" + "00" + ":" + "00";
+              var timestamp = (new Date(timestring)).toLocaleString();
           data.push({ time: timestamp, unitName: row.value.max});
       }
       
@@ -292,8 +294,8 @@ function toggled() {
     // load home page initially
     $(".page").hide();
     $(".home").show();
-    setHomeChart("9", "temp", "station1", "homeChartTemp", "lastday");
-    setHomeChart("9", "humid", "station1", "homeChartHumid", "lastday");
+    setHomeChart("6", "temp", "station1", "homeChartTemp", "lastday");
+    setHomeChart("6", "humid", "station1", "homeChartHumid", "lastday");
     nowReading("currentTemp", "station1", "temp" );
     nowReading("currentHumid", "station1", "humid" );
     
@@ -302,8 +304,8 @@ function toggled() {
     $("#hrefHome").click(function(){
       $(".page").hide();
       $(".home").show();
-      setHomeChart("9", "temp", "station1", "homeChartTemp", "lastday");
-      setHomeChart("9", "humid", "station1", "homeChartHumid", "lastday");
+      setHomeChart("6", "temp", "station1", "homeChartTemp", "lastday");
+      setHomeChart("6", "humid", "station1", "homeChartHumid", "lastday");
       nowReading("currentTemp", "station1", "temp" );
       nowReading("currentHumid", "station1", "humid" );
       toggled();
