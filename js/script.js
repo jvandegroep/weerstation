@@ -173,6 +173,7 @@ function setChartOverview(chartId, station, level, view, unitName) {
       
       var a = JSON.parse(res);
       var data = [];
+      var j = 0;
       for (var i = 0; i < a.rows.length; i++) {
           var row = a.rows[i];
           var unitName = row.key[0];
@@ -183,16 +184,23 @@ function setChartOverview(chartId, station, level, view, unitName) {
               var hours = "T00:00:00";
               var timestring = row.key[2] + "-" + row.key[3] + "-" + row.key[4];
               var timestamp = (new Date(timestring)).toLocaleDateString();
+              var iteration = 0; // output every time
           }
           if (fullURL.includes("week")) {
               if (row.key[5] < 10 ) {row.key[5] = "0" + row.key[5]}; // add extra 0 before the hour for creating a proper timestring
               var timestring = row.key[2] + "-" + row.key[3] + "-" + row.key[4] + "T" + row.key[5] + ":" + "00" + ":" + "00";
               var timestamp = (new Date(timestring)).toLocaleString();
+              var iteration = 4; // output only every 4 times
           }
           
-          // push values to chart array
-          if (unitName === "temp") {data.push({ time: timestamp, temp: row.value.max});};
-          if (unitName === "humid") {data.push({ time: timestamp, humid: row.value.max});};
+          if (j == iteration) {
+          
+            // push values to chart array
+            if (unitName === "temp") {data.push({ time: timestamp, temp: row.value.max});};
+            if (unitName === "humid") {data.push({ time: timestamp, humid: row.value.max});};
+            j = 0;
+          } else {j++;}
+          
       }
       
       // create chart
@@ -226,7 +234,7 @@ function setChartOverview(chartId, station, level, view, unitName) {
 
 
 // get station alias
-  // alias document: c121653f72ed3f9adf6b7e079ef746fb
+// alias document: c121653f72ed3f9adf6b7e079ef746fb
 function getAlias(obj, elid) {
   var aliasDoc = "c121653f72ed3f9adf6b7e079ef746fb";
   var fullURL = DBURLConfig + aliasDoc;
@@ -257,8 +265,6 @@ function getAlias(obj, elid) {
       
       // parse response
       var a = JSON.parse(res);
-      
-      
       
       // iterate to response and contruct table or list
       for (var key in a) {
