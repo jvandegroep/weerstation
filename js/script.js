@@ -2,8 +2,10 @@
 var DBHOST = "192.168.178.2";
 var DBPORT = "5984";
 var DBNAME = "weerdb"
+var DBCONFIG = "weerdbconfig"
 var DBURL = "https://" + DBHOST + ":" + DBPORT + "/weerdb/_design/measurements/_view/";
 var DBURLSimple = "https://" + DBHOST + ":" + DBPORT + "/" + DBNAME + "/";
+var DBURLConfig = "https://" + DBHOST + ":" + DBPORT + "/" + DBCONFIG + "/";
 
 
 // Get DB data from url and send back data
@@ -224,11 +226,11 @@ function setChartOverview(chartId, station, level, view, unitName) {
 
 
 // get station alias
-  // alias document: c121653f72ed3f9adf6b7e079ef28f61
+  // alias document: c121653f72ed3f9adf6b7e079ef746fb
 function getAlias(obj, elid) {
-  var aliasDoc = "c121653f72ed3f9adf6b7e079ef28f61";
-  var fullURL = DBURLSimple + aliasDoc;
-  getData(DBURLSimple, function(res){
+  var aliasDoc = "c121653f72ed3f9adf6b7e079ef746fb";
+  var fullURL = DBURLConfig + aliasDoc;
+  getData(fullURL, function(res){
     var table = "<tr> <th>Station</th> <th>Huidge alias</th> </tr>";
     var select;
     
