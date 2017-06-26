@@ -32,6 +32,7 @@ function httpData(url,cmd,data,res){
     res("");
   };
   if (data) {
+    xhttp.setRequestHeader('Content-type','application/json; charset=utf-8');
     xhttp.send(data);
   } else {
     xhttp.send();
@@ -251,14 +252,13 @@ function addAlias(obj, elid) {
   
   // get the data
   httpData(fullURL, "GET", "", function(res){
-    
-    console.log("addAlias - response", res);
-  
-    var postData = res[newStationName] = newAliasName;
+    var postData = JSON.parse(res);
+    // add key/value to object
+    postData[newStationName] = newAliasName;
       
     console.log("addAlias - postData", postData);
     
-    httpData(fullURL, "PUT", postData, function(res){
+    httpData(fullURL, "PUT", JSON.stringify(postData), function(res){
       
     });
     
