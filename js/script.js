@@ -190,7 +190,7 @@ function setChartOverview(chartId, station, level, view, unitName) {
               if (row.key[5] < 10 ) {row.key[5] = "0" + row.key[5]}; // add extra 0 before the hour for creating a proper timestring
               var timestring = row.key[2] + "-" + row.key[3] + "-" + row.key[4] + "T" + row.key[5] + ":" + "00" + ":" + "00";
               var timestamp = (new Date(timestring)).toLocaleString();
-              var iteration = 4; // output only every 4 times
+              var iteration = 3; // output only every 4 times
           }
           
           if (j == iteration) {
@@ -250,9 +250,9 @@ function getAlias(obj, elid) {
       if (obj == 'table') {
       
         // create dummy table
-        table = table + "<tr id=" + "aliasRow" + ">" + "<td>" + "station1" + "</td>" + "<td>" + "</td>" + "</tr>";
-        table = table + "<tr id=" + "aliasRow" + ">" + "<td>" + "station2" + "</td>" + "<td>" + "</td>" + "</tr>";
-        table = table + "<tr id=" + "aliasRow" + ">" + "<td>" + "station3" + "</td>" + "<td>" + "</td>" + "</tr>";
+        table = table + "<tr id=" + "aliasRow" + ">" + "<td>" + "station1" + "</td>" + "<td>" + "zolder" + "</td>" + "</tr>";
+        table = table + "<tr id=" + "aliasRow" + ">" + "<td>" + "station2" + "</td>" + "<td>" + "buiten" + "</td>" + "</tr>";
+        table = table + "<tr id=" + "aliasRow" + ">" + "<td>" + "station3" + "</td>" + "<td>" + "testje" + "</td>" + "</tr>";
       
       } else {
         // create dummy list
@@ -377,11 +377,17 @@ function toggled() {
       toggled();
     });
     
+    // Alias name refresh
+    $(document).on("click", "#maintRefresh", function(){
+      console.log("refresh clicked");
+      getAlias("table", "aliasTable");
+    });
+    
     
     // Alias name pick
     $(document).on("click", "#aliasRow", function(){
       // get the text from the row data
-      var aliasPick = ($(this).text());
+      var aliasPick = ($(this)[0].cells[0].innerText);
       document.getElementById("aliasInput").value = aliasPick;
     });
 });
