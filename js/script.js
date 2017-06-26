@@ -6,10 +6,11 @@ var DBCONFIG = "weerdbconfig"
 var DBURL = "https://" + DBHOST + ":" + DBPORT + "/weerdb/_design/measurements/_view/";
 var DBURLSimple = "https://" + DBHOST + ":" + DBPORT + "/" + DBNAME + "/";
 var DBURLConfig = "https://" + DBHOST + ":" + DBPORT + "/" + DBCONFIG + "/";
+var aliasDoc = "c121653f72ed3f9adf6b7e079ef746fb";
 
 
 // Get DB data from url and send back data
-function getData(url,res){
+function httpData(url,cmd,res){
    var xhttp = new XMLHttpRequest();
    xhttp.onreadystatechange = function() {
      if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -20,7 +21,7 @@ function getData(url,res){
       console.log("connection failed, no response from URL:", url);
     }
   };
-  xhttp.open("GET", url, true);
+  xhttp.open(cmd, url, true);
   xhttp.timeout = 2000; // time in milliseconds
   xhttp.ontimeout = function(e) {
     console.error("Timeout, cannot contact ", url);
@@ -45,7 +46,7 @@ function nowReading(elid, station, unitName) {
   console.log("nowReading - unit=", unit, "startparams=", startparams, "FullURL: ", fullURL);
   
   // Get request
-  getData(fullURL, function (res){
+  httpData(fullURL, "GET", function (res){
 
       // loading dummy data in case of no response
       if (!res ){
@@ -81,7 +82,7 @@ function setHomeChart(level, unitName, station, chartID, view){
   console.log("setHomeChart - unit=", unit, "startparams=", startparams, "FullURL: ", fullURL);
   
   // Get request
-  getData(fullURL, function (res){
+  httpData(fullURL, "GET", function (res){
 
       // loading dummy data in case of no response
       if (!res && JSON.stringify(fullURL).indexOf('temp') >= 0){
@@ -144,7 +145,7 @@ function setChartOverview(chartId, station, level, view, unitName) {
 	var fullURL=DBURL+ view +'?group_level=' + level + '&startkey='+ JSON.stringify(startparams)+'&endkey='+JSON.stringify(endparams);
 
   console.log("setChartOverview - startparams=", startparams, "FullURL: ", fullURL);
-  getData(fullURL, function (res){
+  httpData(fullURL, "GET", function (res){
 
       // loading dummy data
       if (!res){
@@ -232,13 +233,39 @@ function setChartOverview(chartId, station, level, view, unitName) {
 }
 
 
+// Add station and alias
+// alias document: c121653f72ed3f9adf6b7e079ef746fb
+function addAlias(obj, elid) {
+  var fullURL = DBURLConfig + aliasDoc;
+  httpData(fullURL, "GET", function(res){
+    
+    console.log("addAlias - response", res);
+  
+      var newStationName = document.getElementById("newStationName").value;
+      var newAliasName = document.getElementById("newAliasName").value;
+      
+      // check if field are not empty
+      if (!newStationName || !newAliasName) {
+        alert("Stationsnaam of aliasnaam niet ingevuld..");
+        return;
+      }
+      
+      
+      
+      // empty input fields
+      setOutput("newStationName", "");
+      setOutput("newAliasName", "");
+      
+      
+      
+  });
+}
 
 // get station alias
 // alias document: c121653f72ed3f9adf6b7e079ef746fb
 function getAlias(obj, elid) {
-  var aliasDoc = "c121653f72ed3f9adf6b7e079ef746fb";
   var fullURL = DBURLConfig + aliasDoc;
-  getData(fullURL, function(res){
+  httpData(fullURL, "GET", function(res){
     var table = "<tr> <th>Station</th> <th>Huidge alias</th> </tr>";
     var select;
     
@@ -282,7 +309,10 @@ function getAlias(obj, elid) {
     // output table to element
     if (obj == 'table') {
       setOutput(elid, table);
-    } else { setOutput(elid, select); } 
+    } 
+    if (obj == 'select'){ 
+      setOutput(elid, select); 
+    } else {console.log("getAlias - no element is updated because the argument was empty")}
     
   });
 }
@@ -383,6 +413,11 @@ function toggled() {
       getAlias("table", "aliasTable");
     });
     
+    // Add station
+    $(document).on("click", "#addAlias", function(){
+      console.log("add alias clicked");
+      addAlias();
+    });
     
     // Alias name pick
     $(document).on("click", "#aliasRow", function(){

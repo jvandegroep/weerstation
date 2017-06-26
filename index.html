@@ -76,7 +76,7 @@
         <span id="currentHumid" style="color : #42a4f4"></span>
         <br />
         <br />
-        <h5>Meetdatum - <span id="nowDate"></span></h5>
+        <h6>Meetdatum - <span id="nowDate"></span></h6>
       </div>
       <div class="col-sm-7">
         <h2 id="titelHome">Het weer - laatste 24 uur</h2>
@@ -130,15 +130,24 @@
     <div class="row">
       <div class="col-sm-1"></div>
       <div class="col-sm-11">
-        <h2> onderhoudspagina </h2>
+        <h2> Onderhoudspagina </h2>
         <br />
-        <h5>Selecteer en wijzig een alias van station</h5>
+        <h3>Wijzig alias</h3>
+        <h5>Selecteer en wijzig een alias van de huidige station</h5>
         <br />
         <table id="aliasTable"></table>
         <br />
         <input type="text" id="aliasInput" readonly placeholder="Click Alias"/>
         <input type="text" id="newAlias" placeholder="Nieuwe alias naam"/>
         <button id="changeAlias">Wijzig</button> <span id="maintRefresh" class="glyphicon glyphicon-refresh"></span>
+        <br />
+        <br />
+        <br />
+        <h3>Station toevoegen</h3>
+        <br />
+        <input type="text" id="newStationName" placeholder="Nieuwe stationnaam"/>
+        <input type="text" id="newAliasName" placeholder="Nieuwe aliasnaam"/>
+        <button id="addAlias">Toevoegen</button>
       </div>
     </div>
   </div>
