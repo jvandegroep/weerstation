@@ -401,7 +401,7 @@ function toggled() {
     $("#hrefWeek").click(function(){
       $(".page").hide();
       $(".weeksum").show();
-      getAlias('list', 'weekList');
+      getAlias('select', 'weekList');
       setVanaf("week", "vanafWeek");
       setChartOverview("weekChartTemp", "station1", "6", "lastweek", "temp");
       setChartOverview("weekChartHumid", "station1", "6", "lastweek", "humid");
