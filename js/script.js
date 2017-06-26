@@ -246,9 +246,9 @@ function getAlias(obj, elid) {
       
       } else {
         // create dummy list
-        select = select + "<option value=" + "Zolder" + ">" + "Zolder" + "</option>";
-        select = select + "<option value=" + "Buiten" + ">" + "Buiten" + "</option>";
-        select = select + "<option value=" + "Kapsalon" + ">" + "Kapsalon" + "</option>";
+        select = select + "<option value=" + "station1" + ">" + "Zolder" + "</option>";
+        select = select + "<option value=" + "station2" + ">" + "Buiten" + "</option>";
+        select = select + "<option value=" + "station3" + ">" + "Kapsalon" + "</option>";
         }
       
     } else {
@@ -265,7 +265,7 @@ function getAlias(obj, elid) {
           if (obj == 'table') {
             table = table + "<tr id=" + "aliasRow" + ">" + "<td>" + key + "</td>" + "<td>" + a[key] +  "</td>" + "</tr>"; // if table
           } else {
-            select = select + "<option value=" + a[key] + ">" + a[key] + "</option>"; // if list
+            select = select + "<option value=" + key + ">" + a[key] + "</option>"; // if list
           }
         }
       }
