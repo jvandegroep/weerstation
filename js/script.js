@@ -1,7 +1,9 @@
 // Static variables
 var DBHOST = "192.168.178.2";
 var DBPORT = "5984";
+var DBNAME = "weerdb"
 var DBURL = "https://" + DBHOST + ":" + DBPORT + "/weerdb/_design/measurements/_view/";
+var DBURLSimple = "https://" + DBHOST + ":" + DBPORT + "/" + DBNAME + "/";
 
 
 // Get DB data from url and send back data
@@ -35,10 +37,10 @@ function getData(url,res){
 function nowReading(elid, station, unitName) {
   var startparams=[unitName, station];
 	var endparams=[unitName,{}];
-	var fullURL="https://" + DBHOST + ":" + DBPORT + "/weerdb/" + "_all_docs?limit=1&include_docs=true&descending=true";
+	var fullURL= DBURLSimple + "_all_docs?limit=1&include_docs=true&descending=true";
 	
   if (unitName == "temp") {var unit = " Celsius";} else { unit = " %";}1;
-  console.log("nowReading - unit=", unit, "startparams=", startparams);
+  console.log("nowReading - unit=", unit, "startparams=", startparams, "FullURL: ", fullURL);
   
   // Get request
   getData(fullURL, function (res){
@@ -74,7 +76,7 @@ function setHomeChart(level, unitName, station, chartID, view){
 	var endparams=[unitName,{}];
 	var fullURL=DBURL+ view +'?group_level=' + level + '&startkey='+ JSON.stringify(startparams)+'&endkey='+JSON.stringify(endparams);
   if (unitName == "temp") {var unit = " ℃";} else { unit = " %";}1;
-  console.log("setHomeChart - unit=", unit, "startparams=", startparams);
+  console.log("setHomeChart - unit=", unit, "startparams=", startparams, "FullURL: ", fullURL);
   
   // Get request
   getData(fullURL, function (res){
@@ -139,7 +141,7 @@ function setChartOverview(chartId, station, level, view, unitName) {
 	var endparams=[unitName,{}];
 	var fullURL=DBURL+ view +'?group_level=' + level + '&startkey='+ JSON.stringify(startparams)+'&endkey='+JSON.stringify(endparams);
 
-  console.log("setChartOverview - startparams=", startparams);
+  console.log("setChartOverview - startparams=", startparams, "FullURL: ", fullURL);
   getData(fullURL, function (res){
 
       // loading dummy data
@@ -220,37 +222,64 @@ function setChartOverview(chartId, station, level, view, unitName) {
 }
 
 
+
 // get station alias
-function getAlias() {
-  getData(DBURL, function(res){
+  // alias document: c121653f72ed3f9adf6b7e079ef28f61
+function getAlias(obj, elid) {
+  var aliasDoc = "c121653f72ed3f9adf6b7e079ef28f61";
+  var fullURL = DBURLSimple + aliasDoc;
+  getData(DBURLSimple, function(res){
     var table = "<tr> <th>Station</th> <th>Huidge alias</th> </tr>";
+    var select;
     
     // load dummy data if res is empty
     if (!res){
       
       console.log("could not load alias data, loading dummy data");
       
-      // create dummy table
-      table = table + "<tr id=" + "aliasRow" + ">" + "<td>" + "station1" + "</td>" + "<td>" + "</td>" + "</tr>";
-      table = table + "<tr id=" + "aliasRow" + ">" + "<td>" + "station2" + "</td>" + "<td>" + "</td>" + "</tr>";
-      table = table + "<tr id=" + "aliasRow" + ">" + "<td>" + "station3" + "</td>" + "<td>" + "</td>" + "</tr>";
+      if (obj == 'table') {
+      
+        // create dummy table
+        table = table + "<tr id=" + "aliasRow" + ">" + "<td>" + "station1" + "</td>" + "<td>" + "</td>" + "</tr>";
+        table = table + "<tr id=" + "aliasRow" + ">" + "<td>" + "station2" + "</td>" + "<td>" + "</td>" + "</tr>";
+        table = table + "<tr id=" + "aliasRow" + ">" + "<td>" + "station3" + "</td>" + "<td>" + "</td>" + "</tr>";
+      
+      } else {
+        // create dummy list
+        select = select + "<option value=" + "Zolder" + ">" + "Zolder" + "</option>";
+        select = select + "<option value=" + "Buiten" + ">" + "Buiten" + "</option>";
+        select = select + "<option value=" + "Kapsalon" + ">" + "Kapsalon" + "</option>";
+        }
       
     } else {
       
       // parse response
       var a = JSON.parse(res);
       
-      // iterate to response and contruct table.
-      for (var i=0; i<a.rows.length; i++) {
-        var row = a.rows[i];
-        table = table + "<tr>" + "<td>" + row.key + "</td>" + "<td>" + row.value.alias + "</td>" + "</tr>";
+      
+      
+      // iterate to response and contruct table or list
+      for (var key in a) {
+        if (JSON.stringify(key).lastIndexOf('station') >= 0 ) {
+          
+          if (obj == 'table') {
+            table = table + "<tr id=" + "aliasRow" + ">" + "<td>" + key + "</td>" + "<td>" + a[key] +  "</td>" + "</tr>"; // if table
+          } else {
+            select = select + "<option value=" + a[key] + ">" + a[key] + "</option>"; // if list
+          }
+        }
       }
     }
     
     // output table to element
-    setOutput("aliasTable", table);
+    if (obj == 'table') {
+      setOutput(elid, table);
+    } else { setOutput(elid, select); } 
+    
   });
 }
+
+
 
 // Create vanaf date
 function setVanaf(vanaf, elid) {
@@ -309,7 +338,7 @@ function toggled() {
       $(".page").hide();
       $(".maint").show();
       toggled();
-      getAlias();
+      getAlias("table", "aliasTable");
     });
     
     // load about page after click
@@ -323,6 +352,7 @@ function toggled() {
     $("#hrefWeek").click(function(){
       $(".page").hide();
       $(".weeksum").show();
+      getAlias('list', 'weekList');
       setVanaf("week", "vanafWeek");
       setChartOverview("weekChartTemp", "station1", "6", "lastweek", "temp");
       setChartOverview("weekChartHumid", "station1", "6", "lastweek", "humid");
