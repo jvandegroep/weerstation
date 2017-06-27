@@ -278,7 +278,6 @@ function addAlias(obj, elid) {
 function getAlias(obj, elid) {
   var fullURL = DBURLConfig + aliasDoc;
   console.log("GetAlias - full url:", fullURL);
-  console.log("test");
   httpData(fullURL, "GET", "", function(res){
     var table = "<tr> <th>Station</th> <th>Huidge alias</th> </tr>";
     var select;
