@@ -451,7 +451,9 @@ function sleep (time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
 
-// Load charts when document is ready
+
+
+// LOAD WHEN READY AND LOAD PAGES WHEN CLICKED
   $(document).ready(function() {
     
     // load home page initially
@@ -513,6 +515,9 @@ function sleep (time) {
       toggled();
     });
     
+    
+    // CLICK EVENTS
+    
     // Alias name refresh
     $(document).on("click", "#maintRefresh", function(){
       getAlias("table", "aliasTable");
@@ -533,12 +538,12 @@ function sleep (time) {
       delAlias();
     });
     
-    
     // Alias name pick
     $(document).on("click", "#aliasRow", function(){
       // get the text from the row data
       var aliasPick = ($(this)[0].cells[0].innerText);
       document.getElementById("aliasInput").value = aliasPick;
     });
+    
 });
 
