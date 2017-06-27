@@ -237,7 +237,7 @@ function setChartOverview(chartId, station, level, view, unitName) {
 }
 
 
-// Add station and alias
+// ADD STATION AND ALIAS
 // alias document: c121653f72ed3f9adf6b7e079ef746fb
 function addAlias(obj, elid) {
   var fullURL = DBURLConfig + aliasDoc;
@@ -273,7 +273,81 @@ function addAlias(obj, elid) {
   });
 }
 
-// get station alias
+
+// CHANGE ALIAS
+// alias document: c121653f72ed3f9adf6b7e079ef746fb
+function changeAlias() {
+  var fullURL = DBURLConfig + aliasDoc;
+  console.log("changeAlias - full url:", fullURL);
+  var changeStationName = document.getElementById("aliasInput").value;
+  var changeAliasName = document.getElementById("newAlias").value;
+  
+  // check if field are not empty
+  if (!changeStationName || !changeAliasName) {
+    alert("Te wijzigen stationsnaam of aliasnaam niet ingevuld..");
+    return;
+  }
+  
+  // get the data
+  httpData(fullURL, "GET", "", function(res){
+    var postData = JSON.parse(res);
+    // change key/value to object
+    postData[changeStationName] = changeAliasName;
+      
+    console.log("changeAlias - postData", postData);
+    
+    httpData(fullURL, "PUT", JSON.stringify(postData), function(res){
+      
+    });
+    
+    // update alias table
+    getAlias("table", "aliasTable");
+      
+    // empty input fields
+    setOutput("aliasInput", "");
+    setOutput("newAlias", "");
+      
+  });
+}
+
+
+// DELETE STATION AND ALIAS
+// alias document: c121653f72ed3f9adf6b7e079ef746fb
+function delAlias() {
+  var fullURL = DBURLConfig + aliasDoc;
+  console.log("delAlias - full url:", fullURL);
+  var changeStationName = document.getElementById("aliasInput").value;
+  
+  // check if field are not empty
+  if (!changeStationName) {
+    alert("Stationsnaam niet geselecteerd..");
+    return;
+  }
+  
+  // get the data
+  httpData(fullURL, "GET", "", function(res){
+    var postData = JSON.parse(res);
+    // delete key/value to object
+    delete postData[changeStationName];
+      
+    console.log("delAlias - postData", postData);
+    
+    httpData(fullURL, "PUT", JSON.stringify(postData), function(res){
+      
+    });
+    
+    // update alias table
+    getAlias("table", "aliasTable");
+      
+    // empty input fields
+    setOutput("aliasInput", "");
+    setOutput("newAlias", "");
+      
+  });
+}
+
+
+// GET STATION ALIAS
 // alias document: c121653f72ed3f9adf6b7e079ef746fb
 function getAlias(obj, elid) {
   var fullURL = DBURLConfig + aliasDoc;
@@ -426,9 +500,20 @@ function toggled() {
     });
     
     // Add station
-    $(document).on("click", "#addAlias", function(){
+    $(document).on("click", "#maintAddAlias", function(){
       addAlias();
     });
+    
+    // Change station
+    $(document).on("click", "#maintChangeAlias", function(){
+      changeAlias();
+    });
+    
+    // Delete station
+    $(document).on("click", "#maintDelAlias", function(){
+      delAlias();
+    });
+    
     
     // Alias name pick
     $(document).on("click", "#aliasRow", function(){
