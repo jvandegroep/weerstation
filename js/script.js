@@ -269,8 +269,8 @@ function addAlias(obj, elid) {
     });
       
     // empty input fields
-    setOutput("newStationName", "");
-    setOutput("newAliasName", "");
+    document.getElementById("newStationName").value = "";
+    document.getElementById("newAliasName").value = "";
       
   });
 }
@@ -308,8 +308,8 @@ function changeAlias() {
     });
     
     // empty input fields
-    setOutput("aliasInput", "");
-    setOutput("newAlias", "");
+    document.getElementById("aliasInput").value = "";
+    document.getElementById("newAlias").value = "";
       
   });
 }
@@ -351,7 +351,7 @@ function delAlias() {
         
       // empty input fields
       document.getElementById("aliasInput").value = "";
-      setOutput("newAlias", "");
+      document.getElementById("newAlias").value = "";
         
     });
   } else {console.log("Deletion not confirmed by user..")}
