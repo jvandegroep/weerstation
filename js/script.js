@@ -263,7 +263,7 @@ function addAlias(obj, elid) {
       
     });
     
-    sleep(500).then(() => {
+    sleep(300).then(() => {
       // update alias table
       getAlias("table", "aliasTable");        
     });
@@ -302,7 +302,7 @@ function changeAlias() {
       
     });
     
-    sleep(500).then(() => {
+    sleep(300).then(() => {
       // update alias table
       getAlias("table", "aliasTable");        
     });
@@ -343,7 +343,7 @@ function delAlias() {
         
       });
       
-      sleep(500).then(() => {
+      sleep(300).then(() => {
         // update alias table
         getAlias("table", "aliasTable");        
       });
@@ -457,6 +457,7 @@ function sleep (time) {
     // load home page initially
     $(".page").hide();
     $(".home").show();
+    getAlias('select', 'nowList');
     setHomeChart("6", "temp", "station1", "homeChartTemp", "lastday");
     setHomeChart("6", "humid", "station1", "homeChartHumid", "lastday");
     nowReading("currentTemp", "station1", "temp" );
@@ -467,6 +468,7 @@ function sleep (time) {
     $("#hrefHome").click(function(){
       $(".page").hide();
       $(".home").show();
+      getAlias('select', 'nowList');
       setHomeChart("6", "temp", "station1", "homeChartTemp", "lastday");
       setHomeChart("6", "humid", "station1", "homeChartHumid", "lastday");
       nowReading("currentTemp", "station1", "temp" );
@@ -504,6 +506,7 @@ function sleep (time) {
     $("#hrefMonth").click(function(){
       $(".page").hide();
       $(".maandsum").show();
+      getAlias('select', 'monthList');
       setVanaf("maand", "vanafMaand");
       setChartOverview("maandChartTemp", "station1", "5", "lastmonth", "temp");
       setChartOverview("maandChartHumid", "station1", "5", "lastmonth", "humid");
