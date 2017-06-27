@@ -325,7 +325,7 @@ function getAlias(obj, elid) {
     } 
     if (obj == 'select'){ 
       setOutput(elid, select); 
-    } else {console.log("getAlias - no element is updated because the argument was empty")}
+    }
     
   });
 }
