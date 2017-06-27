@@ -14,7 +14,7 @@ function httpData(url,cmd,data,res){
    var xhttp = new XMLHttpRequest();
    xhttp.onreadystatechange = function() {
      if (xhttp.readyState == 4 && (xhttp.status == 200 || xhttp.status == 201)) {
-          console.log("data received (200) from: " + DBHOST + " on port: " + DBPORT);
+          //console.log("data received (200) from: " + DBHOST + " on port: " + DBPORT);
           res(xhttp.responseText);
         }
     if (xhttp.readyState == 4 && xhttp.status == 404) {
@@ -241,6 +241,7 @@ function setChartOverview(chartId, station, level, view, unitName) {
 // alias document: c121653f72ed3f9adf6b7e079ef746fb
 function addAlias(obj, elid) {
   var fullURL = DBURLConfig + aliasDoc;
+  console.log("addAlias - full url:", fullURL);
   var newStationName = document.getElementById("newStationName").value;
   var newAliasName = document.getElementById("newAliasName").value;
   
@@ -276,6 +277,7 @@ function addAlias(obj, elid) {
 // alias document: c121653f72ed3f9adf6b7e079ef746fb
 function getAlias(obj, elid) {
   var fullURL = DBURLConfig + aliasDoc;
+  console.log("getAlias - full url:", fullURL);
   httpData(fullURL, "GET", "", function(res){
     var table = "<tr> <th>Station</th> <th>Huidge alias</th> </tr>";
     var select;
