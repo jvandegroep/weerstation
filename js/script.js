@@ -263,8 +263,10 @@ function addAlias(obj, elid) {
       
     });
     
-    // update alias table
-    getAlias("table", "aliasTable");
+    sleep(500).then(() => {
+      // update alias table
+      getAlias("table", "aliasTable");        
+    });
       
     // empty input fields
     setOutput("newStationName", "");
@@ -300,9 +302,11 @@ function changeAlias() {
       
     });
     
-    // update alias table
-    getAlias("table", "aliasTable");
-      
+    sleep(500).then(() => {
+      // update alias table
+      getAlias("table", "aliasTable");        
+    });
+    
     // empty input fields
     setOutput("aliasInput", "");
     setOutput("newAlias", "");
@@ -339,8 +343,11 @@ function delAlias() {
         
       });
       
-      // update alias table
-      getAlias("table", "aliasTable");
+      sleep(500).then(() => {
+        // update alias table
+        getAlias("table", "aliasTable");        
+      });
+
         
       // empty input fields
       document.getElementById("aliasInput").value = "";
@@ -437,6 +444,11 @@ function toggled() {
   if (expanded == "true") {
     $('.navbar-toggle').click();
   }
+}
+
+// sleep time expects milliseconds
+function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
 }
 
 // Load charts when document is ready
