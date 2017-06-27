@@ -324,26 +324,30 @@ function delAlias() {
     return;
   }
   
-  // get the data
-  httpData(fullURL, "GET", "", function(res){
-    var postData = JSON.parse(res);
-    // delete key/value to object
-    delete postData[changeStationName];
+  // confirm by user
+  if (confirm("Please confirm to delete ", changeStationName )) {
+  
+    // get the data
+    httpData(fullURL, "GET", "", function(res){
+      var postData = JSON.parse(res);
+      // delete key/value to object
+      delete postData[changeStationName];
+        
+      console.log("delAlias - postData", postData);
       
-    console.log("delAlias - postData", postData);
-    
-    httpData(fullURL, "PUT", JSON.stringify(postData), function(res){
+      httpData(fullURL, "PUT", JSON.stringify(postData), function(res){
+        
+      });
       
+      // update alias table
+      getAlias("table", "aliasTable");
+        
+      // empty input fields
+      document.getElementById("aliasInput").value = "";
+      setOutput("newAlias", "");
+        
     });
-    
-    // update alias table
-    getAlias("table", "aliasTable");
-      
-    // empty input fields
-    setOutput("aliasInput", "");
-    setOutput("newAlias", "");
-      
-  });
+  } else {console.log("Deletion not confirmed by user..")}
 }
 
 
