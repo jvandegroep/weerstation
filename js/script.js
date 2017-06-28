@@ -47,7 +47,7 @@ function nowReading(elid, station, unitName) {
 	var endparams=[unitName,{}];
 	var fullURL= DBURL + "all?&limit=1&include_docs=true&descending=true";
 	
-  if (unitName == "temp") {var unit = " Celsius";} else { unit = " %";}1;
+  if (unitName == "temp") {var unit = " °C";} else { unit = " %";}1;
   console.log("nowReading - unit=", unit, "startparams=", startparams, "FullURL: ", fullURL);
   
   // Get request

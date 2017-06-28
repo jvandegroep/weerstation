@@ -1,3 +1,9 @@
+.well-lg {
+  max-width: 250px;
+  padding-top: 5px;
+  background-color: white;
+}
+
 .form-control {
   width: auto;
 }
