@@ -247,7 +247,7 @@ function addAlias(obj, elid) {
   
   // check if field are not empty
   if (!newStationName || !newAliasName) {
-    alert("Stationsnaam of aliasnaam niet ingevuld..");
+    $("#maintModal").modal();
     return;
   }
   
@@ -286,7 +286,7 @@ function changeAlias() {
   
   // check if field are not empty
   if (!changeStationName || !changeAliasName) {
-    alert("Te wijzigen stationsnaam of aliasnaam niet ingevuld..");
+    $("#maintModal").modal();
     return;
   }
   
@@ -324,7 +324,7 @@ function delAlias() {
   
   // check if field are not empty
   if (!changeStationName) {
-    alert("Stationsnaam niet geselecteerd..");
+    $("#maintModal").modal();
     return;
   }
   
