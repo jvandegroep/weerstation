@@ -364,7 +364,7 @@ function getAlias(obj, elid) {
   var fullURL = DBURLConfig + aliasDoc;
   console.log("GetAlias - full url:", fullURL);
   httpData(fullURL, "GET", "", function(res){
-    var table = "<tr> <th>Station</th> <th>Huidge alias</th> </tr>";
+    var table = "<tr> <th>Stationsnaam</th> <th>Huidige alias</th> </tr>";
     var select;
     
     // load dummy data if res is empty
@@ -464,6 +464,19 @@ function sleep (time) {
     setHomeChart("6", "humid", "station1", "homeChartHumid", "lastday");
     nowReading("currentTemp", "station1", "temp" );
     nowReading("currentHumid", "station1", "humid" );
+    
+    // interval & check if div is shown
+    window.setInterval(function(){
+    	var divDisplay = document.getElementsByClassName("home")[0].style.display;
+    	
+      if (divDisplay == "block") {
+        setHomeChart("6", "temp", "station1", "homeChartTemp", "lastday");
+        setHomeChart("6", "humid", "station1", "homeChartHumid", "lastday");
+        nowReading("currentTemp", "station1", "temp" );
+        nowReading("currentHumid", "station1", "humid" );
+      }
+      
+    }, 60000);
     
     
     // load home page after click

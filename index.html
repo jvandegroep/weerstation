@@ -67,7 +67,12 @@
     <div class="row">
       <div class="col-sm-1"></div>
       <div class="col-sm-3">
-        <br />
+        <form>
+          <div class="form-group">
+            <select class="form-control input-sm" id="nowList">
+            </select>
+          </div>
+        </form>
         <h2 id="titelHome">Nu</h2>
         <br />
         <h3 id="titelHome">Temperatuur</h3>
@@ -83,7 +88,6 @@
       <div class="col-sm-7">
         <br />
         <h2 id="titelHome">Het weer - laatste 24 uur</h2>
-        <select id="nowList"> </select>
         <p id=homeChartTemp style="height: 200px"></p>
         <p id=homeChartHumid style="height: 200px"></p>
       </div>
@@ -98,7 +102,12 @@
       <div class="col-sm-10">
         <h2 > Weekoverzicht </h2>
         <h5 id="vanafWeek"></h5>
-        <select id="weekList"> </select>
+        <form>
+          <div class="form-group">
+            <select class="form-control input-sm" id="weekList">
+            </select>
+          </div>
+        </form>
         <br />
         <br />
         <h4>Temperatuur</h4>
@@ -118,7 +127,12 @@
       <div class="col-sm-10">
         <h2 > Maandoverzicht </h2>
         <h5 id="vanafMaand"></h5>
-        <select id="monthList"> </select>
+        <form>
+          <div class="form-group">
+            <select class="form-control input-sm" id="monthList">
+            </select>
+          </div>
+        </form>
         <br />
         <br />
         <h4>Temperatuur</h4>
@@ -141,22 +155,29 @@
         <h3>Wijzig & verwijder alias</h3>
         <h5>Selecteer en wijzig een alias of verwijder een station</h5>
         <br />
-        <table id="aliasTable"></table>
-        <br />
-        <input type="text" id="aliasInput" readonly placeholder="Click Alias"/>
-        <input type="text" id="newAlias" placeholder="Nieuwe aliasnaam"/>
-        <button id="maintChangeAlias">Wijzig</button>
-        <button id="maintDelAlias">Verwijder</button>
-        <span id="maintRefresh" class="glyphicon glyphicon-refresh"></span>
-        <br />
+        <div class="table-responsive">
+          <table id="aliasTable" class="table table-hover table-condensed"></table>
+        </div>
+        <form class="form-inline">
+          <div class="form-group">
+            <input type="text" id="aliasInput" class="form-control input-sm" readonly placeholder="Click Alias"/>
+            <input type="text" id="newAlias" class="form-control input-sm" placeholder="Nieuwe aliasnaam"/>
+            <button id="maintChangeAlias" class="btn btn-default btn-sm">Wijzig</button>
+            <button id="maintDelAlias" class="btn btn-default btn-sm">Verwijder</button>
+            <span id="maintRefresh" class="glyphicon glyphicon-refresh"></span>
+          </div>
+        </form>
         <br />
         <br />
         <h3>Nieuw station toevoegen</h3>
-        <h5>Voeg een nieuw station toe en aliasnaam</h5>
-        <br />
-        <input type="text" id="newStationName" placeholder="Stationsnaam"/>
-        <input type="text" id="newAliasName" placeholder="Aliasliasnaam"/>
-        <button id="maintAddAlias">Toevoegen</button>
+        <h5>Voeg een nieuw station en aliasnaam toe</h5>
+          <form class="form-inline">
+            <div class="form-group">
+              <input type="text" id="newStationName" class="form-control input-sm" placeholder="Stationsnaam"/>
+              <input type="text" id="newAliasName" class="form-control input-sm" placeholder="Aliasliasnaam"/>
+              <button id="maintAddAlias" class="btn btn-default btn-sm">Toevoegen</button>
+            </div>
+          </form>
         <br />
         <br />
       </div>
