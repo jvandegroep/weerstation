@@ -11,8 +11,8 @@
 
 
 // Replace with your network details
-const char* ssid = "APOINTN";
-const char* password = "A1b2c3d4E5";
+const char* ssid = "SSID";
+const char* password = "PassWord";
 
 // DHT settings
 #define DHTPIN D2     // what pin we're connected to
