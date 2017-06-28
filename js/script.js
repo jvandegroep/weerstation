@@ -45,7 +45,7 @@ function httpData(url,cmd,data,res){
 function nowReading(elid, station, unitName) {
   var startparams=[unitName, station];
 	var endparams=[unitName,{}];
-	var fullURL= DBURLSimple + "_all_docs?limit=1&include_docs=true&descending=true";
+	var fullURL= DBURL + "all?&limit=1&include_docs=true&descending=true";
 	
   if (unitName == "temp") {var unit = " Celsius";} else { unit = " %";}1;
   console.log("nowReading - unit=", unit, "startparams=", startparams, "FullURL: ", fullURL);
