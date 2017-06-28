@@ -1,3 +1,12 @@
+  #nav {
+    z-index:9999;
+  }
+  
+  .affix {
+      top: 0;
+      width: 100%;
+  }
+
 .well-lg {
   max-width: 250px;
   padding-top: 5px;
