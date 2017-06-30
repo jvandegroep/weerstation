@@ -21,7 +21,9 @@
   <link rel="stylesheet" type="text/css" href="./css/style.css">
   <script src="./js/script.js"></script>
   <script src="./js/dummydata.js"></script>
+  <script src="./js/graphs.js"></script>
   <script src="./src/moment.js"></script>
+
   
 </head>
 <body>
@@ -89,7 +91,7 @@
       </div>
       <div class="col-sm-7">
         <br />
-        <h2 id="titelHome">Het weer - laatste 24 uur</h2>
+        <h2 id="titelHome">Laatste 24 uur</h2>
         <p id=homeChartTemp style="height: 200px"></p>
         <p id=homeChartHumid style="height: 200px"></p>
       </div>
@@ -136,12 +138,9 @@
           </div>
         </form>
         <br />
+        <h4>Temperatuur & Luchtvochtigheid</h4>
         <br />
-        <h4>Temperatuur</h4>
-        <p id="maandChartTemp"></p>
-        <h4>Luchtvochtigheid</h4>
-        <br />
-        <p id="maandChartHumid"></p>
+        <p id="maandChartTH"></p>
       </div>
       <div class="col-sm-1"></div>
     </div>

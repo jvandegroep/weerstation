@@ -4,7 +4,6 @@ var DBPORT = "5984";
 var DBNAME = "weerdb";
 var DBCONFIG = "weerdbconfig";
 var DBURL = "https://" + DBHOST + ":" + DBPORT + "/weerdb/_design/measurements/_view/";
-var DBURLSimple = "https://" + DBHOST + ":" + DBPORT + "/" + DBNAME + "/";
 var DBURLConfig = "https://" + DBHOST + ":" + DBPORT + "/" + DBCONFIG + "/";
 var aliasDoc = "c121653f72ed3f9adf6b7e079ef746fb";
 
@@ -38,6 +37,40 @@ function httpData(url,cmd,data,res){
     xhttp.send();
   }
 }
+
+
+// Get DB data from url and send back data
+function xhttpData(url,cmd, data){
+   var xhttp = new XMLHttpRequest();
+   var res;
+   xhttp.onreadystatechange = function() {
+     if (xhttp.readyState == 4 && (xhttp.status == 200 || xhttp.status == 201)) {
+          //console.log("data received (200) from: " + DBHOST + " on port: " + DBPORT);
+          res(xhttp.responseText);
+        }
+    if (xhttp.readyState == 4 && xhttp.status == 404) {
+      console.log("connection failed, no response from URL:", url);
+    }
+  };
+  xhttp.open(cmd, url, true);
+  xhttp.timeout = 2000; // time in milliseconds
+  xhttp.ontimeout = function(e) {
+    console.error("Timeout, cannot contact ", url);
+    return;
+  };
+  xhttp.onerror = function () {
+    console.log("** An error occurred during the transaction");
+    return;
+  };
+  if (data) {
+    xhttp.setRequestHeader('Content-type','application/json; charset=utf-8');
+    xhttp.send(data);
+  } else {
+    xhttp.send();
+  }
+  return res;
+}
+
 
 
 // HOME NOW READINGS
@@ -186,11 +219,15 @@ function setChartOverview(chartId, station, level, view, unitName) {
           
           // building the datetime string
           if (row.key[3] < 10 ) {row.key[3] = "0" + row.key[3]} // add extra 0 before the month for creating a proper timestring
+          
+          // if month
           if (fullURL.includes("month")) {
               var timestring = row.key[2] + "-" + row.key[3] + "-" + row.key[4];
               var timestamp = (new Date(timestring)).toLocaleDateString();
               var iteration = 0; // output every time
           }
+          
+          // if week
           if (fullURL.includes("week")) {
               if (row.key[5] < 10 ) {row.key[5] = "0" + row.key[5]} // add extra 0 before the hour for creating a proper timestring
               var timestring = row.key[2] + "-" + row.key[3] + "-" + row.key[4] + "T" + row.key[5] + ":" + "00" + ":" + "00";
@@ -523,8 +560,7 @@ function sleep (time) {
       $(".maandsum").show();
       getAlias('select', 'monthList');
       setVanaf("maand", "vanafMaand");
-      setChartOverview("maandChartTemp", "station1", "5", "lastmonth", "temp");
-      setChartOverview("maandChartHumid", "station1", "5", "lastmonth", "humid");
+      setChartTH('maandChartTH', 'station1', '5', 'lastmonth');
       toggled();
     });
     
