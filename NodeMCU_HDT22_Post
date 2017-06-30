@@ -1,0 +1,143 @@
+/*********
+  NodeMCU with HDT22 sensor and create post web
+  request to the couchdb server
+*********/
+
+// Including the ESP8266 WiFi library
+#include <NTPClient.h>
+#include <ESP8266WiFi.h>
+#include <DHT.h>
+#include <WiFiUdp.h>
+
+
+// Replace with your network details
+const char* ssid = "SSID";
+const char* password = "PaSsWoRd";
+
+// DHT settings
+#define DHTPIN D2     // what pin we're connected to
+#define DHTTYPE DHT22   // DHT 22  (AM2302)
+
+// Temporary variables
+float t;  // TEMPERATURE VAR
+float h;  // HUMIDITY VAR
+const char* host = "192.168.178.2";
+const String station = "station1";
+
+// Initialize DHT
+DHT dht(DHTPIN, DHTTYPE); //// Initialize DHT sensor for normal 16mhz Arduino
+
+// Get time
+WiFiUDP ntpUDP;
+
+// By default 'time.nist.gov' is used with 60 seconds update interval and
+// no offset
+NTPClient timeClient(ntpUDP, "europe.pool.ntp.org", 7200);
+
+
+void setup() {
+  // Initializing serial port for debugging purposes
+  Serial.begin(115200);
+  delay(10);
+
+  dht.begin();
+  
+  // Connecting to WiFi network
+  Serial.println();
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+  
+  WiFi.begin(ssid, password);
+  
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  timeClient.begin();
+  
+  Serial.println("");
+  Serial.println("WiFi connected");
+  Serial.println("Station running. Waiting for the IP...");
+  delay(10000);
+  Serial.println(WiFi.localIP());
+}
+
+
+void loop() {
+
+  timeClient.update();
+
+  String formattedTime = timeClient.getFormattedTime();
+  unsigned long timeStamp = timeClient.getEpochTime();
+  
+  Serial.print("timeStamp: ");
+  Serial.println(timeStamp);
+  
+  h = dht.readHumidity();
+  t = dht.readTemperature();
+  
+  // print the temperatures to serial monitor
+  Serial.println("");
+  Serial.print("Temperature: ");
+  Serial.println(t);
+  Serial.print("Humidity: ");
+  Serial.println(h);
+  Serial.print("");
+
+  // print connecting to
+  Serial.print("connecting to ");
+  Serial.println(host);
+  
+
+  // Use WiFiClient class to create TCP connections (check if timestamp is valid)
+  WiFiClient client;
+  const int httpPort = 5984;
+  if (!client.connect(host, httpPort) || timeStamp < 1497708298) {
+    Serial.println("connection failed");
+    return;
+  }
+  
+  // Create POST request data  
+  String PostData = "{\"humid\":";
+         PostData += h;
+         PostData += ",\"source\":\"";
+         PostData += station;
+         PostData += "\",\"temp\":";
+         PostData += t;
+         PostData += ",\"timestamp\":";
+         PostData += timeStamp;
+         PostData += "}";
+
+  Serial.print("PostData = ");
+  Serial.println(PostData);
+  Serial.print("");
+ 
+  // This will post the request to the server
+  client.println("POST /weerdb HTTP/1.1");
+  client.println("Host: 192.168.178.2:5984");
+  client.println("User-Agent: Arduino/1.0");
+  //client.println("Cache-Control: no-cache");
+  client.println("Content-Type: application/json");
+  client.print("Content-Length: ");
+  client.println(PostData.length());
+  client.println();
+  client.println(PostData);
+
+  // get response from post
+  Serial.println("Respond POST: ");
+  while(client.available()){
+    char resPost = client.read();
+    Serial.print(resPost);
+  }
+
+  if (client.connected()) { 
+    client.stop();  // DISCONNECT FROM THE SERVER
+  }
+
+  Serial.println("closing connection");
+  Serial.println("--------------------------------------------------------------");
+  Serial.println("");
+
+  delay(60000); // WAIT FIVE MINUTES BEFORE SENDING AGAIN
+}
