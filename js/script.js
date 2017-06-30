@@ -47,6 +47,7 @@ function xhttpData(url,cmd, data){
      if (xhttp.readyState == 4 && (xhttp.status == 200 || xhttp.status == 201)) {
           //console.log("data received (200) from: " + DBHOST + " on port: " + DBPORT);
           res = xhttp.responseText;
+          return res;
         }
     if (xhttp.readyState == 4 && xhttp.status == 404) {
       console.log("connection failed, no response from URL:", url);

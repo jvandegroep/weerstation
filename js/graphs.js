@@ -49,6 +49,8 @@ function setChartTH(element, station, level, view) {
 	
 	var fullURLT=DBURL+ view +'?group_level=' + level + '&startkey='+ JSON.stringify(startparamsT)+'&endkey='+JSON.stringify(endparamsT);
 	var fullURLH=DBURL+ view +'?group_level=' + level + '&startkey='+ JSON.stringify(startparamsH)+'&endkey='+JSON.stringify(endparamsH);
+	console.log("setChartTH - temp URL", fullURLT);
+	console.log("setChartTH - humid URL", fullURLH);
 
     var a = xhttpData(fullURLT, "GET", "");
     var b = xhttpData(fullURLH, "GET", "");
@@ -63,7 +65,6 @@ function setChartTH(element, station, level, view) {
         }
         if (fullURLT.includes("month")) {
             a = dummyMonthTemp;
-            console.log("var a: ", a);
         }
     }
     
@@ -74,7 +75,6 @@ function setChartTH(element, station, level, view) {
         }
         if (fullURLH.includes("month")) {
             b = dummyMonthHumid;
-            console.log("var b: ", b);
         }
     }
     
@@ -87,7 +87,6 @@ function setChartTH(element, station, level, view) {
     
     // format all temp readings
     for (var i = 0; i < a.rows.length; i++) {
-        console.log("iteration a: ", i);
         var row = a.rows[i];
         if (row.key[3] < 10 ) {row.key[3] = "0" + row.key[3]}
         
@@ -99,7 +98,6 @@ function setChartTH(element, station, level, view) {
          
         // per humid reading - go through all readings and reformat
         for (var j = 0; j < b.rows.length; j++) {
-            console.log("iteration b: ", j);
             var rowb = b.rows[j];
             if (rowb.key[3] < 10 ) {rowb.key[3] = "0" + rowb.key[3]}
             if (fullURLT.includes("month")) {
@@ -109,14 +107,12 @@ function setChartTH(element, station, level, view) {
             
             // fill the data array when equal timestamp is found
             if (timestampb == timestamp) {
-                console.log("timestampb - ", timestampb, " == ", timestamp);
-                console.log("time: " + timestamp + ", temp: " + row.value.max + ", humid: " + rowb.value.max);
                 data.push({time: timestamp, temp: row.value.max, humid: rowb.value.max})
             }
             	
         }
     }
-    console.log(data);
+    console.log("setChartTH - ", data);
     // create multiline chart
     createMultiLineGraph(element, data);
     
