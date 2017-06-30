@@ -1,14 +1,3 @@
-// variables
-var DBHOST = "192.168.178.2";
-var DBPORT = "5984";
-var DBNAME = "weerdb";
-var DBCONFIG = "weerdbconfig";
-var DBURL = "https://" + DBHOST + ":" + DBPORT + "/weerdb/_design/measurements/_view/";
-var DBURLConfig = "https://" + DBHOST + ":" + DBPORT + "/" + DBCONFIG + "/";
-var aliasDoc = "c121653f72ed3f9adf6b7e079ef746fb";
-
-
-
 // GET ALIAS object from station name
 function getStationAlias(station) {
   var fullURL = DBURLConfig + aliasDoc;
