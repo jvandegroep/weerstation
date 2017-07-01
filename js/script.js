@@ -79,7 +79,7 @@ function xhttpData(url,cmd, data){
 function nowReading(elid, station, unitName) {
   var startparams=[unitName, station];
 	var endparams=[unitName,{}];
-	var fullURL= DBURL + "all?&limit=1&include_docs=true&descending=true";
+	var fullURL= DBURL + "all?&limit=1&include_docs=true&descending=true" + '&startkey='+ JSON.stringify(startparams)+'&endkey='+JSON.stringify(endparams);
 	
   if (unitName == "temp") {var unit = " °C";} else { unit = " %";}1;
   console.log("nowReading - unit=", unit, "startparams=", startparams, "FullURL: ", fullURL);
@@ -506,12 +506,12 @@ function sleep (time) {
     // interval & check if div is shown
     window.setInterval(function(){
     	var divDisplay = document.getElementsByClassName("home")[0].style.display;
-    	
+    	var station = document.getElementById("nowList").value;
       if (divDisplay == "block") {
-        setHomeChart("6", "temp", "station1", "homeChartTemp", "lastday");
-        setHomeChart("6", "humid", "station1", "homeChartHumid", "lastday");
-        nowReading("currentTemp", "station1", "temp" );
-        nowReading("currentHumid", "station1", "humid" );
+        setHomeChart("6", "temp", station, "homeChartTemp", "lastday");
+        setHomeChart("6", "humid", station, "homeChartHumid", "lastday");
+        nowReading("currentTemp", station, "temp" );
+        nowReading("currentHumid", station, "humid" );
       }
       
     }, 60000);
@@ -604,7 +604,7 @@ function sleep (time) {
       nowReading("currentTemp", station, "temp" );
       nowReading("currentHumid", station, "humid" );
     });
-    
+
     // Change week select
     $("#weekList").change(function(){
       // get the text from the option
