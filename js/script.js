@@ -78,7 +78,7 @@ function xhttpData(url,cmd, data){
 // Example: nowReading("currentTemp", "station1", "temp" );
 function nowReading(elid, station, unitName) {
   var startparams=[unitName, station];
-	var endparams=[unitName,{}];
+	var endparams=[unitName station,{}];
 	var fullURL= DBURL + "all?&limit=1&include_docs=true&descending=true" + '&startkey='+ JSON.stringify(startparams)+'&endkey='+JSON.stringify(endparams);
 	
   if (unitName == "temp") {var unit = " °C";} else { unit = " %";}1;
@@ -115,7 +115,7 @@ function nowReading(elid, station, unitName) {
 // Example: setHomeChart("6", "temp", "station1", "homeChartTemp", "lastday");
 function setHomeChart(level, unitName, station, chartID, view){
   var startparams=[unitName, station];
-	var endparams=[unitName,{}];
+	var endparams=[unitName,station{}];
 	var fullURL=DBURL+ view +'?group_level=' + level + '&startkey='+ JSON.stringify(startparams)+'&endkey='+JSON.stringify(endparams);
   if (unitName == "temp") {var unit = " ℃";} else { unit = " %";}1;
   console.log("setHomeChart - unit=", unit, "startparams=", startparams, "FullURL: ", fullURL);
@@ -180,7 +180,7 @@ function setHomeChart(level, unitName, station, chartID, view){
 function setChartOverview(chartId, station, level, view, unitName) {
   
   var startparams=[unitName, station];
-	var endparams=[unitName,{}];
+	var endparams=[unitName,station{}];
 	var fullURL=DBURL+ view +'?group_level=' + level + '&startkey='+ JSON.stringify(startparams)+'&endkey='+JSON.stringify(endparams);
 
   console.log("setChartOverview - startparams=", startparams, "FullURL: ", fullURL);
