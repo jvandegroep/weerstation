@@ -413,15 +413,15 @@ function getAlias(obj, elid) {
       if (obj == 'table') {
       
         // create dummy table
-        table = table + "<tr id=" + "aliasRow" + ">" + "<td>" + "station1" + "</td>" + "<td>" + "zolder" + "</td>" + "</tr>";
-        table = table + "<tr id=" + "aliasRow" + ">" + "<td>" + "station2" + "</td>" + "<td>" + "buiten" + "</td>" + "</tr>";
-        table = table + "<tr id=" + "aliasRow" + ">" + "<td>" + "station3" + "</td>" + "<td>" + "testje" + "</td>" + "</tr>";
+        table = table + "<tr id=" + "aliasRow" + ">" + "<td>" + "station1" + "</td>" + "<td>" + "Zolder" + "</td>" + "</tr>";
+        table = table + "<tr id=" + "aliasRow" + ">" + "<td>" + "station2" + "</td>" + "<td>" + "Huiskamer" + "</td>" + "</tr>";
+        table = table + "<tr id=" + "aliasRow" + ">" + "<td>" + "station3" + "</td>" + "<td>" + "Buiten" + "</td>" + "</tr>";
       
       } else {
         // create dummy list
         select = select + "<option value=" + "station1" + ">" + "Zolder" + "</option>";
-        select = select + "<option value=" + "station2" + ">" + "Buiten" + "</option>";
-        select = select + "<option value=" + "station3" + ">" + "Kapsalon" + "</option>";
+        select = select + "<option value=" + "station2" + ">" + "Huiskamer" + "</option>";
+        select = select + "<option value=" + "station3" + ">" + "Buiten" + "</option>";
         }
       
     } else {
@@ -593,6 +593,31 @@ function sleep (time) {
       // get the text from the row data
       var aliasPick = ($(this)[0].cells[0].innerText);
       document.getElementById("aliasInput").value = aliasPick;
+    });
+    
+    // Change home select
+    $("#nowList").change(function(){
+      // get the text from the option
+      var station = document.getElementById("nowList").value;
+      setHomeChart("6", "temp", station, "homeChartTemp", "lastday");
+      setHomeChart("6", "humid", station, "homeChartHumid", "lastday");
+      nowReading("currentTemp", station, "temp" );
+      nowReading("currentHumid", station, "humid" );
+    });
+    
+    // Change week select
+    $("#weekList").change(function(){
+      // get the text from the option
+      var station = document.getElementById("weekList").value;
+      setChartOverview("weekChartTemp", station, "6", "lastweek", "temp");
+      setChartOverview("weekChartHumid", station, "6", "lastweek", "humid");
+    });
+    
+    // Change month select
+    $("#monthList").change(function(){
+      // get the text from the option
+      var station = document.getElementById("monthList").value;
+      setChartTH('maandChartTH', station, '5', 'lastmonth');
     });
     
 });
