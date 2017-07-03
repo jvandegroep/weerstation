@@ -330,3 +330,11 @@ var dummyDayTemp = {"rows":[
           {"key":["temp","station1",2017,6,22,21],"value":{"sum":1584.0999999999999091,"count":56,"min":27.899999999999998579,"max":28.699999999999999289,"sumsqr":44812.029999999998836}},
           {"key":["temp","station1",2017,6,22,22],"value":{"sum":585.5,"count":21,"min":27.699999999999999289,"max":28.100000000000001421,"sumsqr":16324.569999999999709}}
           ]};
+          
+
+var dummyMonthBattery = {"rows":[
+          {"key":["battery","station2",2017,6,30],"value":{"sum":32482,"count":12,"min":2685,"max":2712,"sumsqr":87924410}},
+          {"key":["battery","station2",2017,7,1],"value":{"sum":403348,"count":149,"min":2685,"max":2714,"sumsqr":1091892312}},
+          {"key":["battery","station2",2017,7,2],"value":{"sum":405481,"count":150,"min":2685,"max":2717,"sumsqr":1096116955}},
+          {"key":["battery","station2",2017,7,3],"value":{"sum":292258,"count":108,"min":2689,"max":2718,"sumsqr":790888656}}
+          ]}

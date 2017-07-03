@@ -305,9 +305,10 @@ function setChartBattery(chartId, station, level, view, unitName) {
 
   var unit;
   var fullURL;
+  var iteration;
 
-  var startparams=[station];
-	var endparams=[station,{}];
+  var startparams=['battery',station];
+	var endparams=['battery', station,{}];
 
   fullURL= DBURL + view +'?group_level=' + level + '&startkey='+ JSON.stringify(startparams)+'&endkey='+JSON.stringify(endparams);
 
@@ -318,26 +319,24 @@ function setChartBattery(chartId, station, level, view, unitName) {
       if (!res){
         console.log("loading dummy data");
 
-        if (fullURL.includes("temp")) {
+        if (fullURL.includes("battery")) {
           if (fullURL.includes("week")) {
               res = JSON.stringify(dummyWeekTemp);
           }
           if (fullURL.includes("month")) {
-              res = JSON.stringify(dummyMonthTemp);
+              res = JSON.stringify(dummyMonthBattery);
           }
         }
       }
 
       var a = JSON.parse(res);
+      console.log("data: ",a);
       var data = [];
       var j = 0;
-      var unitName;
-      var iteration;
       var timestring;
       var timestamp;
       for (var i = 0; i < a.rows.length; i++) {
           var row = a.rows[i];
-          unitName = row.key[0];
 
           // building the datetime string
           if (row.key[3] < 10 ) {row.key[3] = "0" + row.key[3];} // add extra 0 before the month for creating a proper timestring
@@ -361,14 +360,14 @@ function setChartBattery(chartId, station, level, view, unitName) {
           if (j == iteration) {
 
             // push values to chart array
-            data.push({ time: timestamp, temp: row.value.max});
+            data.push({ time: timestamp, amps: row.value.max});
+            console.log("pushing data, ", data);
             j = 0;
           } else {j++;}
 
       }
 
       // create chart
-      var unit = " amps";
 
       // empty current element
       setOutput(chartId, "");
@@ -380,9 +379,9 @@ function setChartBattery(chartId, station, level, view, unitName) {
           data: data,
           xkey: 'time',
           ykeys: [unitName],
-          postUnits: unit,
+          postUnits: ' A',
           lineColors: ['green'],
-          labels: [unitName],
+          labels: ['ampere'],
           grid: true,
           parseTime: false,
           resize: true,
@@ -687,8 +686,8 @@ function convertStartParam(stationName) {
       $(".maint").show();
       toggled();
       getAlias("table", "aliasTable");
-      setChartBattery("batterijHuiskamer", "station2", "6", "lastbattery", "amps");
-      setChartBattery("batterijBuiten", "station3", "6", "lastbattery", "amps");
+      setChartBattery("batterijHuiskamer", "station2", "5", "lastmonthbattery", "amps");
+      setChartBattery("batterijBuiten", "station3", "5", "lastmonthbattery", "amps");
     });
 
     // load about page after click
