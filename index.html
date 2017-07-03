@@ -4,19 +4,19 @@
   <title>Weerstation Wilde Zwaan</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
     <!-- jquery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  
+
   <!-- bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  
+
   <!-- morris.js -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-  
+
   <!-- Local -->
   <link rel="stylesheet" type="text/css" href="./css/style.css">
   <script src="./js/script.js"></script>
@@ -24,7 +24,7 @@
   <script src="./js/graphs.js"></script>
   <script src="./src/moment.js"></script>
 
-  
+
 </head>
 <body>
 
@@ -98,7 +98,7 @@
       <div class="col-sm-1"></div>
     </div>
   </div>
-  
+
   <!-- Week page -->
   <div class="container-fluid page weeksum">
     <div class="row">
@@ -123,7 +123,7 @@
       <div class="col-sm-1"></div>
     </div>
   </div>
-  
+
     <!-- Month page -->
   <div class="container-fluid page maandsum">
     <div class="row">
@@ -138,14 +138,16 @@
           </div>
         </form>
         <br />
-        <h4>Temperatuur & Luchtvochtigheid</h4>
+        <h4>Temperatuur</h4>
+        <p id="monthChartTemp"></p>
         <br />
-        <p id="maandChartTH"></p>
+        <h4>Luchtvochtigheid</h4>
+        <p id="monthChartHumid"></p>
       </div>
       <div class="col-sm-1"></div>
     </div>
   </div>
-  
+
   <!-- Onderhouds page -->
   <div class="container-fluid page maint">
     <div class="row">
@@ -184,7 +186,7 @@
         <!-- Modal -->
         <div class="modal fade" id="maintModal" role="dialog">
           <div class="modal-dialog">
-          
+
             <!-- Modal content-->
             <div class="modal-content">
               <div class="modal-header">
@@ -198,19 +200,19 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               </div>
             </div>
-            
+
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+
   <!-- OverOns page -->
   <div class="container-fluid page about">
     <div class="row">
       <div class="col-sm-1"></div>
       <div class="col-sm-11">
-        <h2 > Over ons </h2> 
+        <h2 > Over ons </h2>
       </div>
     </div>
   </div>
