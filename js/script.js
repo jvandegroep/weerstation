@@ -297,6 +297,101 @@ function setChartOverview(chartId, station, level, view, unitName) {
 }
 
 
+
+// CREATE BATTERY OVERVIEW
+ // example: setChartBattery("batterijHuiskamer", "station2", "6", "lastweek", "amps");
+
+function setChartBattery(chartId, station, level, view, unitName) {
+
+  var unit;
+  var fullURL;
+
+  var startparams=[station];
+	var endparams=[station,{}];
+
+  fullURL= DBURL + view +'?group_level=' + level + '&startkey='+ JSON.stringify(startparams)+'&endkey='+JSON.stringify(endparams);
+
+  console.log("setChartBattery - startparams=", startparams, "endparams", endparams, "FullURL: ", fullURL);
+  httpData(fullURL, "GET", "", function (res){
+
+      // loading dummy data
+      if (!res){
+        console.log("loading dummy data");
+
+        if (fullURL.includes("temp")) {
+          if (fullURL.includes("week")) {
+              res = JSON.stringify(dummyWeekTemp);
+          }
+          if (fullURL.includes("month")) {
+              res = JSON.stringify(dummyMonthTemp);
+          }
+        }
+      }
+
+      var a = JSON.parse(res);
+      var data = [];
+      var j = 0;
+      var unitName;
+      var iteration;
+      var timestring;
+      var timestamp;
+      for (var i = 0; i < a.rows.length; i++) {
+          var row = a.rows[i];
+          unitName = row.key[0];
+
+          // building the datetime string
+          if (row.key[3] < 10 ) {row.key[3] = "0" + row.key[3];} // add extra 0 before the month for creating a proper timestring
+          if (row.key[4] < 10 ) {row.key[4] = "0" + row.key[4];} // add extra 0 before the month for creating a proper timestring
+
+          // if month
+          if (fullURL.includes("month")) {
+              timestring = row.key[2] + "-" + row.key[3] + "-" + row.key[4];
+              timestamp = (new Date(timestring)).toLocaleDateString();
+              iteration = 0; // output every time
+          }
+
+          // if week
+          if (fullURL.includes("week")) {
+              if (row.key[5] < 10 ) {row.key[5] = "0" + row.key[5];} // add extra 0 before the hour for creating a proper timestring
+              timestring = row.key[2] + "-" + row.key[3] + "-" + row.key[4] + "T" + row.key[5] + ":" + "00" + ":" + "00";
+              timestamp = (new Date(timestring)).toLocaleString();
+              iteration = 3; // output only every 4 times
+          }
+
+          if (j == iteration) {
+
+            // push values to chart array
+            data.push({ time: timestamp, temp: row.value.max});
+            j = 0;
+          } else {j++;}
+
+      }
+
+      // create chart
+      var unit = " amps";
+
+      // empty current element
+      setOutput(chartId, "");
+
+
+      // homeChart settings
+      var chart = new Morris.Line({
+          element: chartId,
+          data: data,
+          xkey: 'time',
+          ykeys: [unitName],
+          postUnits: unit,
+          lineColors: ['green'],
+          labels: [unitName],
+          grid: true,
+          parseTime: false,
+          resize: true,
+      });
+  });
+}
+
+
+
 // ADD STATION AND ALIAS
 // alias document: c121653f72ed3f9adf6b7e079ef746fb
 function addAlias(obj, elid) {
@@ -592,6 +687,8 @@ function convertStartParam(stationName) {
       $(".maint").show();
       toggled();
       getAlias("table", "aliasTable");
+      setChartBattery("batterijHuiskamer", "station2", "6", "lastbattery", "amps");
+      setChartBattery("batterijBuiten", "station3", "6", "lastbattery", "amps");
     });
 
     // load about page after click
