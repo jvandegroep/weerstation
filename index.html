@@ -67,29 +67,58 @@
   <!-- Home page -->
   <div class="container-fluid page home">
     <div class="row">
-      <div class="col-sm-1"></div>
-      <div class="col-sm-3">
+      <div class="col-sm-2">
+         <div class="well well-lg">
+          <h2 id="titelHome">Zolder</h2>
+          <br />
+          <h3 id="titelHome">Temperatuur</h3>
+          <span id="currentTemp1" class="currentTemp" style="color : red;"></span>
+          <br />
+          <br />
+          <h3 id="titelHome">Luchtvochtigheid</h3>
+          <span id="currentHumid1" class="currentHumid" style="color : #42a4f4"></span>
+          <br />
+          <br />
+          <h6>Meetdatum - <span id="nowDate1"></span></h6>
+        </div>
+      </div>
+      <div class="col-sm-2">
+         <div class="well well-lg">
+          <h2 id="titelHome">Huiskamer</h2>
+          <br />
+          <h3 id="titelHome">Temperatuur</h3>
+          <span id="currentTemp2" class="currentTemp" style="color : red;"></span>
+          <br />
+          <br />
+          <h3 id="titelHome">Luchtvochtigheid</h3>
+          <span id="currentHumid2" class="currentHumid" style="color : #42a4f4"></span>
+          <br />
+          <br />
+          <h6>Meetdatum - <span id="nowDate2"></span></h6>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="well well-lg">
+          <h2 id="titelHome">Buiten</h2>
+          <br />
+          <h3 id="titelHome">Temperatuur</h3>
+          <span id="currentTemp3" class="currentTemp" style="color : red;"></span>
+          <br />
+          <br />
+          <h3 id="titelHome">Luchtvochtigheid</h3>
+          <span id="currentHumid3" class="currentHumid" style="color : #42a4f4"></span>
+          <br />
+          <br />
+          <h6>Meetdatum - <span id="nowDate3"></span></h6>
+        </div>
+      </div>
+      <div class="col-sm-6">
         <form>
           <div class="form-group">
             <select class="form-control input-sm" id="nowList">
             </select>
           </div>
         </form>
-        <div class="well well-lg">
-          <h2 id="titelHome">Nu</h2>
-          <br />
-          <h3 id="titelHome">Temperatuur</h3>
-          <span id="currentTemp" style="color : red;"></span>
-          <br />
-          <br />
-          <h3 id="titelHome">Luchtvochtigheid</h3>
-          <span id="currentHumid" style="color : #42a4f4"></span>
-          <br />
-          <br />
-          <h6>Meetdatum - <span id="nowDate"></span></h6>
-        </div>
-      </div>
-      <div class="col-sm-7">
         <br />
         <h2 id="titelHome">Laatste 24 uur</h2>
         <p id=homeChartTemp style="height: 200px"></p>

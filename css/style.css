@@ -36,12 +36,12 @@
   font-weight: 400;
 }
 
-#currentTemp {
+.currentTemp {
   font-size: 300%;
   font-weight: 100;
 }
 
-#currentHumid {
+.currentHumid {
   font-size: 300%;
   font-weight: 100;
 }

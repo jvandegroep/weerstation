@@ -74,8 +74,8 @@ function xhttpData(url,cmd, data, cb){
 
 
 // HOME NOW READINGS
-// Example: nowReading("currentTemp", "station1", "temp" );
-function nowReading(elid, station, unitName) {
+// Example: nowReading("currentTemp", "station1", "temp", "nowDate1" );
+function nowReading(elid, station, unitName, nowDate) {
   var stationS = convertStartParam(station);
   var stationE = convertEndParam(station);
   var fullURL;
@@ -112,8 +112,8 @@ function nowReading(elid, station, unitName) {
       var timestamp = new Date(t).toLocaleString();
 
       setOutput(elid, measurement + unit);
-      setOutput("nowDate", "");
-      setOutput("nowDate", timestamp);
+      setOutput(nowDate, "");
+      setOutput(nowDate, timestamp);
   });
 }
 
@@ -549,9 +549,13 @@ function convertStartParam(stationName) {
     getAlias('select', 'nowList');
     setHomeChart("6", "temp", "station1", "homeChartTemp", "lastday");
     setHomeChart("6", "humid", "station1", "homeChartHumid", "lastday");
-    nowReading("currentTemp", "station1", "temp" );
-    nowReading("currentHumid", "station1", "humid" );
-
+    nowReading("currentTemp1", "station1", "temp", "nowDate1" );
+    nowReading("currentHumid1", "station1", "humid", "nowDate1" );
+    nowReading("currentTemp2", "station2", "temp", "nowDate2" );
+    nowReading("currentHumid2", "station2", "humid", "nowDate2" );
+    nowReading("currentTemp3", "station3", "temp", "nowDate3" );
+    nowReading("currentHumid3", "station", "humid", "nowDate3" );    
+    
     // interval & check if div is shown
     window.setInterval(function(){
     	var divDisplay = document.getElementsByClassName("home")[0].style.display;
@@ -559,8 +563,12 @@ function convertStartParam(stationName) {
       if (divDisplay == "block") {
         setHomeChart("6", "temp", station, "homeChartTemp", "lastday");
         setHomeChart("6", "humid", station, "homeChartHumid", "lastday");
-        nowReading("currentTemp", station, "temp" );
-        nowReading("currentHumid", station, "humid" );
+        nowReading("currentTemp1", "station1", "temp", "nowDate1" );
+        nowReading("currentHumid1", "station1", "humid", "nowDate1" );
+        nowReading("currentTemp2", "station2", "temp", "nowDate2" );
+        nowReading("currentHumid2", "station2", "humid", "nowDate2" );
+        nowReading("currentTemp3", "station3", "temp", "nowDate3" );
+        nowReading("currentHumid3", "station", "humid", "nowDate3" );
       }
 
     }, 60000);
@@ -651,8 +659,6 @@ function convertStartParam(stationName) {
       var station = document.getElementById("nowList").value;
       setHomeChart("6", "temp", station, "homeChartTemp", "lastday");
       setHomeChart("6", "humid", station, "homeChartHumid", "lastday");
-      nowReading("currentTemp", station, "temp" );
-      nowReading("currentHumid", station, "humid" );
     });
 
     // Change week select
