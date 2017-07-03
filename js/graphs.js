@@ -13,7 +13,6 @@ function getStationAlias(station) {
 }
 
 
-
 // CREATE MULTI LINE CHART IN ELEMENT FOR TEMP & HUMID
 function createMultiLineGraph(element, data){
 
