@@ -9,10 +9,17 @@
 #include <DHT.h>
 #include <WiFiUdp.h>
 
+// sleep delay
+#define SLEEP_DELAY_IN_SECONDS  600
+
+// power settings
+extern "C" {
+  uint16 readvdd33(void);
+}
 
 // Replace with your network details
 const char* ssid = "SSID";
-const char* password = "PaSsWoRd";
+const char* password = "password";
 
 // DHT settings
 #define DHTPIN D2     // what pin we're connected to
@@ -22,7 +29,7 @@ const char* password = "PaSsWoRd";
 float t;  // TEMPERATURE VAR
 float h;  // HUMIDITY VAR
 const char* host = "192.168.178.2";
-const String station = "station1";
+const String station = "station3";
 
 // Initialize DHT
 DHT dht(DHTPIN, DHTTYPE); //// Initialize DHT sensor for normal 16mhz Arduino
@@ -41,6 +48,9 @@ void setup() {
   delay(10);
 
   dht.begin();
+
+  // Configure wifi
+ // WiFi.config(ip, dns, gateway, subnet); 
   
   // Connecting to WiFi network
   Serial.println();
@@ -71,23 +81,25 @@ void loop() {
   String formattedTime = timeClient.getFormattedTime();
   unsigned long timeStamp = timeClient.getEpochTime();
   
-  Serial.print("timeStamp: ");
-  Serial.println(timeStamp);
+  //Serial.print("timeStamp: ");
+  //Serial.println(timeStamp);
   
   h = dht.readHumidity();
   t = dht.readTemperature();
   
   // print the temperatures to serial monitor
-  Serial.println("");
-  Serial.print("Temperature: ");
-  Serial.println(t);
-  Serial.print("Humidity: ");
-  Serial.println(h);
-  Serial.print("");
+  //Serial.println("");
+  //Serial.print("Temperature: ");
+  //Serial.println(t);
+  //Serial.print("Humidity: ");
+  //Serial.println(h);
+  //Serial.print("");
+  //Serial.println("battery voltage: ");
+  //Serial.print(readvdd33());
 
   // print connecting to
-  Serial.print("connecting to ");
-  Serial.println(host);
+  Serial.println("connecting to ");
+  Serial.print(host);
   
 
   // Use WiFiClient class to create TCP connections (check if timestamp is valid)
@@ -107,6 +119,8 @@ void loop() {
          PostData += t;
          PostData += ",\"timestamp\":";
          PostData += timeStamp;
+         PostData += ",\"battery\":";
+         PostData += readvdd33();
          PostData += "}";
 
   Serial.print("PostData = ");
@@ -139,5 +153,10 @@ void loop() {
   Serial.println("--------------------------------------------------------------");
   Serial.println("");
 
-  delay(60000); // WAIT FIVE MINUTES BEFORE SENDING AGAIN
+  Serial.println("Entering deep sleep mode for ");
+  Serial.print(SLEEP_DELAY_IN_SECONDS);
+  Serial.print(" seconds...");
+  ESP.deepSleep(SLEEP_DELAY_IN_SECONDS * 1000000, WAKE_RF_DEFAULT);
+  //ESP.deepSleep(10 * 1000, WAKE_NO_RFCAL);
+  delay(500);   // wait for deep sleep to happen
 }

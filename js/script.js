@@ -250,7 +250,7 @@ function setChartOverview(chartId, station, level, view, unitName) {
           }
 
           // if week
-          if (fullURL.includes("week")) {
+          if (fullURL.indexOf("week") > -1) {
               if (row.key[5] < 10 ) {row.key[5] = "0" + row.key[5];} // add extra 0 before the hour for creating a proper timestring
               timestring = row.key[2] + "-" + row.key[3] + "-" + row.key[4] + "T" + row.key[5] + ":" + "00" + ":" + "00";
               timestamp = (new Date(timestring)).toLocaleString();
@@ -379,9 +379,9 @@ function setChartBattery(chartId, station, level, view, unitName) {
           data: data,
           xkey: 'time',
           ykeys: [unitName],
-          postUnits: ' A',
+          postUnits: ' mA',
           lineColors: ['green'],
-          labels: ['ampere'],
+          labels: ['milliampere'],
           grid: true,
           parseTime: false,
           resize: true,
