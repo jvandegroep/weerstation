@@ -206,22 +206,22 @@ function setChartOverview(chartId, station, level, view, unitName) {
       if (!res){
         console.log("loading dummy data");
 
-        if (fullURL.includes("temp")) {
+        if (fullURL.indexOf("temp") > -1) {
           unit = " ℃";
-          if (fullURL.includes("week")) {
+          if (fullURL.indexOf("week") > -1) {
               res = JSON.stringify(dummyWeekTemp);
           }
-          if (fullURL.includes("month")) {
+          if (fullURL.indexOf("month") > -1) {
               res = JSON.stringify(dummyMonthTemp);
           }
         }
 
-        if (fullURL.includes("humid")) {
+        if (fullURL.indexOf("humid") > -1) {
           unit = " %";
-          if (fullURL.includes("week")) {
+          if (fullURL.indexOf("week") > -1) {
               res = JSON.stringify(dummyWeekHumid);
           }
-          if (fullURL.includes("month")) {
+          if (fullURL.indexOf("month") > -1) {
               res = JSON.stringify(dummyMonthHumid);
           }
         }
@@ -243,7 +243,7 @@ function setChartOverview(chartId, station, level, view, unitName) {
           if (row.key[4] < 10 ) {row.key[4] = "0" + row.key[4];} // add extra 0 before the month for creating a proper timestring
 
           // if month
-          if (fullURL.includes("month")) {
+          if (fullURL.indexOf("month") > -1) {
               timestring = row.key[2] + "-" + row.key[3] + "-" + row.key[4];
               timestamp = (new Date(timestring)).toLocaleDateString();
               iteration = 0; // output every time
@@ -319,11 +319,11 @@ function setChartBattery(chartId, station, level, view, unitName) {
       if (!res){
         console.log("loading dummy data");
 
-        if (fullURL.includes("battery")) {
-          if (fullURL.includes("week")) {
+        if (fullURL.indexOf("battery") > -1) {
+          if (fullURL.indexOf("week") > -1) {
               res = JSON.stringify(dummyWeekTemp);
           }
-          if (fullURL.includes("month")) {
+          if (fullURL.indexOf("month") > -1) {
               res = JSON.stringify(dummyMonthBattery);
           }
         }
@@ -343,14 +343,14 @@ function setChartBattery(chartId, station, level, view, unitName) {
           if (row.key[4] < 10 ) {row.key[4] = "0" + row.key[4];} // add extra 0 before the month for creating a proper timestring
 
           // if month
-          if (fullURL.includes("month")) {
+          if (fullURL.indexOf("month") > -1) {
               timestring = row.key[2] + "-" + row.key[3] + "-" + row.key[4];
               timestamp = (new Date(timestring)).toLocaleDateString();
               iteration = 0; // output every time
           }
 
           // if week
-          if (fullURL.includes("week")) {
+          if (fullURL.indexOf("week") > -1) {
               if (row.key[5] < 10 ) {row.key[5] = "0" + row.key[5];} // add extra 0 before the hour for creating a proper timestring
               timestring = row.key[2] + "-" + row.key[3] + "-" + row.key[4] + "T" + row.key[5] + ":" + "00" + ":" + "00";
               timestamp = (new Date(timestring)).toLocaleString();
@@ -417,10 +417,9 @@ function addAlias(obj, elid) {
 
     });
 
-    sleep(300).then(() => {
-      // update alias table
-      getAlias("table", "aliasTable");
-    });
+    // update alias table
+    setTimeout(getAlias("table", "aliasTable"), 3000);
+
 
     // empty input fields
     document.getElementById("newStationName").value = "";
@@ -456,10 +455,9 @@ function changeAlias() {
 
     });
 
-    sleep(300).then(() => {
-      // update alias table
-      getAlias("table", "aliasTable");
-    });
+    // update alias table
+    setTimeout(getAlias("table", "aliasTable"), 3000);
+
 
     // empty input fields
     document.getElementById("aliasInput").value = "";
@@ -497,10 +495,9 @@ function delAlias() {
 
       });
 
-      sleep(300).then(() => {
-        // update alias table
-        getAlias("table", "aliasTable");
-      });
+    // update alias table
+    setTimeout(getAlias("table", "aliasTable"), 3000);
+
 
 
       // empty input fields
@@ -599,11 +596,6 @@ function toggled() {
   if (expanded == "true") {
     $('.navbar-toggle').click();
   }
-}
-
-// sleep time expects milliseconds
-function sleep (time) {
-  return new Promise((resolve) => setTimeout(resolve, time));
 }
 
 function convertEndParam(stationName) {
