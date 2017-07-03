@@ -156,15 +156,17 @@ function setHomeChart(level, unitName, station, chartID, view){
           if (row.key[5] < 10 ) {row.key[5] = "0" + row.key[5];} // add extra 0 before the hour for creating a proper timestring
               var timestring = row.key[2] + "-" + row.key[3] + "-" + row.key[4] + "T" + row.key[5] + ":" + "00" + ":" + "00";
               var timestamp = (new Date(timestring)).toLocaleString();
-          data.push({ time: timestamp, unitName: row.value.max});
+          data.push({ time: timestamp, Max: row.value.max, Min: row.value.min});
       }
 
       // set color lines
       var lineColor;
       if (unitName == "temp"){
-        lineColor = "red";
+          lineColorMax = "red";
+          lineColorMin = "lightpink";
       } else {
-        lineColor = "#42a4f4";
+          lineColorMax = "#42a4f4";
+          lineColorMin = "lightblue"
       }
 
       // empty current element
@@ -175,10 +177,10 @@ function setHomeChart(level, unitName, station, chartID, view){
           element: chartID,
           data: data,
           xkey: 'time',
-          ykeys: ['unitName'],
+          ykeys: ['Max', 'Min'],
           postUnits: unit,
-          lineColors: [lineColor],
-          labels: [unitName],
+          lineColors: [lineColorMax, lineColorMin],
+          labels: ['Max', 'Min'],
           grid: true,
           parseTime: false,
           resize: true,
@@ -260,8 +262,7 @@ function setChartOverview(chartId, station, level, view, unitName) {
           if (j == iteration) {
 
             // push values to chart array
-            if (unitName === "temp") {data.push({ time: timestamp, temp: row.value.max});}
-            if (unitName === "humid") {data.push({ time: timestamp, humid: row.value.max});}
+            data.push({ time: timestamp, Max: row.value.max, Min: row.value.min});
             j = 0;
           } else {j++;}
 
@@ -275,9 +276,11 @@ function setChartOverview(chartId, station, level, view, unitName) {
       // set color lines
       var lineColor;
       if (unitName == "temp"){
-          lineColor = "red";
+          lineColorMax = "red";
+          lineColorMin = "lightpink";
       } else {
-          lineColor = "#42a4f4";
+          lineColorMax = "#42a4f4";
+          lineColorMin = "lightblue"
       }
 
       // homeChart settings
@@ -285,10 +288,10 @@ function setChartOverview(chartId, station, level, view, unitName) {
           element: chartId,
           data: data,
           xkey: 'time',
-          ykeys: [unitName],
+          ykeys: ['Max', 'Min'],
           postUnits: unit,
-          lineColors: [lineColor],
-          labels: [unitName],
+          lineColors: [lineColorMax, lineColorMin],
+          labels: ['Max', 'Min'],
           grid: true,
           parseTime: false,
           resize: true,
