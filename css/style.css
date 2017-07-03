@@ -36,6 +36,10 @@
   font-weight: 400;
 }
 
+.batterydiv {
+  height: 200px;
+}
+
 .currentTemp {
   font-size: 300%;
   font-weight: 100;
