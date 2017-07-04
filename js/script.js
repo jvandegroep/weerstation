@@ -643,7 +643,7 @@ function convertStartParam(stationName) {
     nowReading("currentTemp2", "station2", "temp", "nowDate2" );
     nowReading("currentHumid2", "station2", "humid", "nowDate2" );
     nowReading("currentTemp3", "station3", "temp", "nowDate3" );
-    nowReading("currentHumid3", "station", "humid", "nowDate3" );    
+    nowReading("currentHumid3", "station3", "humid", "nowDate3" );    
     
     // interval & check if div is shown
     window.setInterval(function(){
@@ -657,7 +657,7 @@ function convertStartParam(stationName) {
         nowReading("currentTemp2", "station2", "temp", "nowDate2" );
         nowReading("currentHumid2", "station2", "humid", "nowDate2" );
         nowReading("currentTemp3", "station3", "temp", "nowDate3" );
-        nowReading("currentHumid3", "station", "humid", "nowDate3" );
+        nowReading("currentHumid3", "station3", "humid", "nowDate3" );
       }
 
     }, 60000);
