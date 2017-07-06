@@ -166,7 +166,7 @@ function setHomeChart(level, unitName, station, chartID, view){
           lineColorMin = "lightpink";
       } else {
           lineColorMax = "#42a4f4";
-          lineColorMin = "lightblue"
+          lineColorMin = "lightblue";
       }
 
       // empty current element
@@ -280,7 +280,7 @@ function setChartOverview(chartId, station, level, view, unitName) {
           lineColorMin = "lightpink";
       } else {
           lineColorMax = "#42a4f4";
-          lineColorMin = "lightblue"
+          lineColorMin = "lightblue";
       }
 
       // homeChart settings
