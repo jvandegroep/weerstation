@@ -670,8 +670,12 @@ function convertStartParam(stationName) {
       getAlias('select', 'nowList');
       setHomeChart("6", "temp", "station1", "homeChartTemp", "lastday");
       setHomeChart("6", "humid", "station1", "homeChartHumid", "lastday");
-      nowReading("currentTemp", "station1", "temp" );
-      nowReading("currentHumid", "station1", "humid" );
+      nowReading("currentTemp1", "station1", "temp", "nowDate1" );
+      nowReading("currentHumid1", "station1", "humid", "nowDate1" );
+      nowReading("currentTemp2", "station2", "temp", "nowDate2" );
+      nowReading("currentHumid2", "station2", "humid", "nowDate2" );
+      nowReading("currentTemp3", "station3", "temp", "nowDate3" );
+      nowReading("currentHumid3", "station3", "humid", "nowDate3" );
       toggled();
     });
 
