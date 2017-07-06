@@ -1,0 +1,15 @@
+{
+  "name": "travis-weerstation",
+  "description": "Simple Travis-CI check for JSHint (Code Linting)",
+  "author": "Jacob van de Groep",
+  "version": "0.0.1",
+  "dependencies": {
+        "express": "3.2.4"
+  },
+  "devDependencies": {
+    "jshint": "^2.6.0"
+  },
+  "scripts": {
+    "test": "./node_modules/jshint/bin/jshint server.js"
+  }
+}
