@@ -13,10 +13,6 @@
     "url": "https://github.com/jshint/jshint.git"
   },
 
-  "bin": {
-    "jshint": "./bin/jshint"
-  },
-
   "devDependencies": {
     "jshint": "latest"
   },
