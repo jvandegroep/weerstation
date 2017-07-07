@@ -3,13 +3,27 @@
   "description": "Simple Travis-CI check for JSHint (Code Linting)",
   "author": "Jacob van de Groep",
   "version": "0.0.1",
+  
   "dependencies": {
         "express": "3.2.4"
   },
+  
+    "repository": {
+    "type": "git",
+    "url": "https://github.com/jshint/jshint.git"
+  },
+
+  "bin": {
+    "jshint": "./bin/jshint"
+  },
+
   "devDependencies": {
     "jshint": "latest"
   },
+  
   "scripts": {
-    "lint": "jshint *.js"
-  }
+    "test": "jshint *.js"
+  },
+  
+  "license": "(MIT AND JSON)",
 }
