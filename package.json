@@ -25,5 +25,5 @@
     "test": "jshint *.js"
   },
   
-  "license": "(MIT AND JSON)",
+  "license": "(MIT AND JSON)"
 }
