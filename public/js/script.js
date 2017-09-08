@@ -794,8 +794,8 @@ function convertStartParam(stationName) {
     $("#jaarList").change(function(){
       // get the text from the option
       var station = document.getElementById("jaarList").value;
-      setChartOverview("jaarChartTemp", station, "5", "lastyear", "temp");
-      setChartOverview("jaarChartHumid", station, "5", "lastyear", "humid");
+      setChartOverview("jaarChartTemp", station, "4", "lastyear", "temp");
+      setChartOverview("jaarChartHumid", station, "4", "lastyear", "humid");
     });
 
 });
