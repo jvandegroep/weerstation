@@ -258,6 +258,13 @@ function setChartOverview(chartId, station, level, view, unitName) {
               timestamp = (new Date(timestring)).toLocaleString();
               iteration = 3; // output only every 4 times
           }
+          
+          // if year
+          if (fullURL.indexOf("year") > -1) {
+              timestring = row.key[2] + "-" + row.key[3] + "-" + "1";
+              timestamp = (new Date(timestring)).toLocaleDateString();
+              iteration = 0; // output every time
+          }
 
           if (j == iteration) {
 
