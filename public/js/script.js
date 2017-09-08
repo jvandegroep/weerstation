@@ -718,6 +718,17 @@ function convertStartParam(stationName) {
       toggled();
     });
 
+    // load jaar page after click
+    $("#hrefYear").click(function(){
+      console.log("jaar button click..")
+      $(".page").hide();
+      $(".jaarsum").show();
+      getAlias('select', 'jaarList');
+      setVanaf("jaar", "vanafJaar");
+      setChartOverview("jaarChartTemp", "station1", "4", "lastyear", "temp");
+      setChartOverview("jaarChartHumid", "station1", "4", "lastyear", "humid");
+      toggled();
+    });
 
     // CLICK EVENTS
 
@@ -770,6 +781,14 @@ function convertStartParam(stationName) {
       var station = document.getElementById("monthList").value;
       setChartOverview("monthChartTemp", station, "5", "lastmonth", "temp");
       setChartOverview("monthChartHumid", station, "5", "lastmonth", "humid");
+    });
+    
+    // Change year select
+    $("#jaarList").change(function(){
+      // get the text from the option
+      var station = document.getElementById("jaarList").value;
+      setChartOverview("jaarChartTemp", station, "5", "lastyear", "temp");
+      setChartOverview("jaarChartHumid", station, "5", "lastyear", "humid");
     });
 
 });
