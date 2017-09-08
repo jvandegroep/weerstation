@@ -1,0 +1,582 @@
+[33mcommit 9ef7385724fd36d8ff9c68499d49fbf257c1c58d[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Wed Sep 6 15:45:51 2017 +0000
+
+    changed index.html
+
+[33mcommit 9a7af46f23d585e3512d8b77e4e0309b095d2901[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Wed Sep 6 15:24:51 2017 +0000
+
+    added dockerFile
+
+[33mcommit a65973991f47444a68bad139a940d8a3392cebb1[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Fri Jul 7 07:42:59 2017 +0000
+
+    test - fix removed semicolon
+
+[33mcommit e9dbd7a1d20343d3bf8bc1d1481d671d1734898f[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Fri Jul 7 07:41:39 2017 +0000
+
+    test - removed semicolon
+
+[33mcommit a51942440139289e5a3a4de2ca5e4ea5bc004a77[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Fri Jul 7 07:40:00 2017 +0000
+
+    fix - json parse error
+
+[33mcommit d580b60d5bdbd480c49b1a66270194c81c9997b8[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Fri Jul 7 07:37:59 2017 +0000
+
+    fix - change jshint test
+
+[33mcommit 1773b5c87d6f2a44ea994297f01ae2d2a5ae2d83[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Fri Jul 7 07:33:51 2017 +0000
+
+    fix - change jshint test
+
+[33mcommit ba6b2abd7c953e2b14b6638581d864c5d33ffe9d[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Fri Jul 7 07:09:21 2017 +0000
+
+    fix - change jshint test names
+
+[33mcommit 2aa0a6d021aa441cb6f4671ca0c5aaf11659b774[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Thu Jul 6 21:33:09 2017 +0000
+
+    travis tests js fix
+
+[33mcommit 0529006284265fc63f79fde39a7d422bf94e98e2[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Thu Jul 6 21:24:21 2017 +0000
+
+    travis tests for all js files **/*.js
+
+[33mcommit c79bad1098d6ce4db3140a452c6d5b5cdea93834[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Thu Jul 6 21:13:47 2017 +0000
+
+    fix nowreading click home
+
+[33mcommit 1ee29a5be6f59d1396f5b9613b6164e308e11c99[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Thu Jul 6 20:21:43 2017 +0000
+
+    fix typos in script.js
+
+[33mcommit 0274fd4e5e4cadd8fa7e1e5c0508338ee6b57d3a[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Thu Jul 6 20:08:10 2017 +0000
+
+    fix jshint path
+
+[33mcommit 1be2997fdb8d85b746b7ade7ce64ce5fe4e870d2[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Thu Jul 6 15:11:36 2017 +0000
+
+    travis typo
+
+[33mcommit 6427818a297fcd6cb203a89ad24e18cb6f8b2190[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Thu Jul 6 15:01:53 2017 +0000
+
+    travis typo
+
+[33mcommit 0c78ae4a4a786f5a2cda03424ef4c3dade07a47a[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Thu Jul 6 14:59:01 2017 +0000
+
+    travis typo add different path
+
+[33mcommit 125553db784766efb0ee755cbd9d00bf49284f64[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Thu Jul 6 14:53:16 2017 +0000
+
+    travis typo add **/*.js
+
+[33mcommit eba8d1d094e6dc733c0d1f525551396363249dbb[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Thu Jul 6 14:50:41 2017 +0000
+
+    typo in travis tests
+
+[33mcommit 6ddbdc5bca3263dad7fc7e019dcb12a87821a342[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Thu Jul 6 14:46:59 2017 +0000
+
+    typo in travis tests
+
+[33mcommit ce59de88276f2ded7d1cf1db584a7decd663e658[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Thu Jul 6 14:43:41 2017 +0000
+
+    removed index.html from travis tests
+
+[33mcommit fcd4c4f55748b4eeffcb7fd397afbe692383ed8a[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Thu Jul 6 14:41:36 2017 +0000
+
+    removed index.html from travis tests
+
+[33mcommit fb7e11786eba8999d94916c9b92a250bc8c41369[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Thu Jul 6 14:38:29 2017 +0000
+
+    added other js files to jslint test
+
+[33mcommit 28d0674f8f37ed54cbd95f6f0145ec4c95d988c3[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Thu Jul 6 14:33:43 2017 +0000
+
+    test: add fault in server.js for travis lint test
+
+[33mcommit 2ce926512c6c5f7df02c0afe914da42213c9ce34[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Thu Jul 6 14:28:01 2017 +0000
+
+    fix: rename travis file name
+
+[33mcommit c73e79ae9a7a33b7b19b387ebbca1b80acd7301b[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Thu Jul 6 13:37:26 2017 +0000
+
+    initial docker fork weerstation
+
+[33mcommit 6f65e7a093985cbbf15abc16086034a4d1e73334[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Wed Jul 5 14:16:45 2017 +0000
+
+    testje
+
+[33mcommit 7e3bc89933bae3fb1892c640118c621427ab01da[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Tue Jul 4 19:44:51 2017 +0000
+
+    fix nowreading
+
+[33mcommit 8b46e3616d91a2afc7bdbf3ea56eef63b1465d9b[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Mon Jul 3 21:16:02 2017 +0000
+
+    add min value to charts
+
+[33mcommit 0c57cbe7a4b4570d1a56362ad463b42707be68a9[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Mon Jul 3 19:53:22 2017 +0000
+
+    visual changes home
+
+[33mcommit 4818a9c6b9f1f63c7e7d694722795e2c2dee052f[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Mon Jul 3 19:19:02 2017 +0000
+
+    battery visuals
+
+[33mcommit bcd553c02c412cdec56c6794795f748741d7a59f[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Mon Jul 3 19:08:56 2017 +0000
+
+    battery visuals
+
+[33mcommit c04767ad21e5e6aa67a4b419c7521317cc809d12[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Mon Jul 3 18:50:53 2017 +0000
+
+    fix sleep function
+
+[33mcommit 6b1d55d014abfe3a3c6bb255a4bf5bc34e1f9e9f[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Mon Jul 3 18:45:39 2017 +0000
+
+    battery fixes
+
+[33mcommit 3c91f7e47088259883ea06a26578eac650afeded[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Mon Jul 3 14:44:07 2017 +0000
+
+    add battery level
+
+[33mcommit 1352de7e8b4e5fe40089e9340d972a6afa44c3fd[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Mon Jul 3 13:53:55 2017 +0000
+
+    add now readigs
+
+[33mcommit f72210b1a060486e51e31bf2dcfdcbcb962a52a6[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Mon Jul 3 13:47:51 2017 +0000
+
+    add now readigs
+
+[33mcommit be1a8c5f961350dbf8532a5fe984a96d0a088bef[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Mon Jul 3 13:20:02 2017 +0000
+
+    fix graphs
+
+[33mcommit 18d1a5280ade8dbb8a103efd75072ba0736d038c[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Mon Jul 3 13:16:52 2017 +0000
+
+    fix graphs
+
+[33mcommit af4d9feb57543c10307156395151e4ec010a477c[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Sat Jul 1 20:47:30 2017 +0000
+
+    fix param
+
+[33mcommit ff755e6a5fe91efd275701a5684dec4f1801afe8[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Sat Jul 1 19:22:00 2017 +0000
+
+    fix nowreading
+
+[33mcommit f95f356297e878f1bc18ef02e5bf09dc1ddb2898[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Sat Jul 1 18:59:33 2017 +0000
+
+    add select event handler
+
+[33mcommit 24ba6e0f3f790e36bda28298f9047ee734590287[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Fri Jun 30 21:41:36 2017 +0000
+
+    fix xhttp
+
+[33mcommit af6258fe64fc7ee6ed066bbf8d2786801d608b2e[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Fri Jun 30 21:34:08 2017 +0000
+
+    fix xhttp
+
+[33mcommit 653fc58478a9703348bce602e0ca29942b996551[m
+Merge: 51ac37b 95d7ae9
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Fri Jun 30 21:01:07 2017 +0000
+
+    Merge branch 'master' of github.com:jvandegroep/weerstation
+
+[33mcommit 51ac37b8c8270595d886cafd9b51305078d8310a[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Fri Jun 30 20:51:38 2017 +0000
+
+    add multiline chart
+
+[33mcommit 95d7ae925fc11641fc85ad725a689a696fa51e91[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Wed Jun 28 20:04:05 2017 +0200
+
+    Create NodeMCU_HDT22_Post
+
+[33mcommit 0396f22019daf0fbe2a59099d791268f5bda6a8b[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Wed Jun 28 20:03:05 2017 +0200
+
+    Delete NodeMCU_HDT22_WebClient_1.ino
+
+[33mcommit 0fbe4e56fe72b83d82212e4b156fd120b2a15ce0[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Wed Jun 28 20:02:56 2017 +0200
+
+    Update NodeMCU_HDT22_WebClient_1.ino
+
+[33mcommit 614d6c8e72fa08e4390e76fa51607fb63497563a[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Wed Jun 28 19:58:44 2017 +0200
+
+    Add files via upload
+
+[33mcommit 584a7ed02cc8c9ad2c8839ee42dbe69a514e8a12[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Wed Jun 28 13:05:26 2017 +0000
+
+    added affix on navbar
+
+[33mcommit bc1f7190cc5ae336a56264340d8c64124cc9b956[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Wed Jun 28 12:37:50 2017 +0000
+
+    added well on homepage
+
+[33mcommit 7bb1137037a48b662990e46ac656bff8eb777375[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Wed Jun 28 12:16:14 2017 +0000
+
+    added modal
+
+[33mcommit 2ac1264edbcddd6cacd67c0ba45812c8462f3cd1[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Wed Jun 28 10:16:02 2017 +0000
+
+    visual updates
+
+[33mcommit bcecb79f92c827bc7fd19115d863e1b2ec4e73ed[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Wed Jun 28 08:32:35 2017 +0000
+
+    fix nowreading
+
+[33mcommit 59ec4c7654cf222f6fcc58ec638108b7d73e8837[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Wed Jun 28 07:47:36 2017 +0000
+
+    test commit
+
+[33mcommit 338e45a1458590550516a135ddd809882a7fb560[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Tue Jun 27 21:19:30 2017 +0000
+
+    add dropdown
+
+[33mcommit 8f9c30dc7358ec8ba0576460c4503c3cc84b2ba2[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Tue Jun 27 20:46:01 2017 +0000
+
+    add dropdown
+
+[33mcommit a68371fcb9d8f46a85faea72456476b4af14fd7b[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Tue Jun 27 20:29:29 2017 +0000
+
+    add dropdown
+
+[33mcommit b4649c79d2af0b388afa26e852e35d18f0f4c061[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Tue Jun 27 20:23:30 2017 +0000
+
+    add sleep getAlias
+
+[33mcommit 5dff3bdf90efc8ccccda2b3fe6fb3d418243e19c[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Tue Jun 27 20:17:32 2017 +0000
+
+    add delAlias confirm
+
+[33mcommit 11ffd9b3d8a5f60621e6045cbb6920db63b5d6e0[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Tue Jun 27 20:05:20 2017 +0000
+
+    add changeAlias and delAlias
+
+[33mcommit 482a7a3b4d723b76aacfa391313e201286dc0dbc[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Tue Jun 27 19:19:08 2017 +0000
+
+    test4
+
+[33mcommit 91e2943606c091a10509f6dd0e4f28da07293912[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Tue Jun 27 19:06:08 2017 +0000
+
+    test3
+
+[33mcommit 164dc8f35a2e8da6e4d2c601343ba4b0d3409a23[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Tue Jun 27 18:51:41 2017 +0000
+
+    test
+
+[33mcommit e254bbb600501489d34baaa81176a8f9a14218fd[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Tue Jun 27 18:45:57 2017 +0000
+
+    remove console log for getAlias
+
+[33mcommit 01e8eda241620862644b7b65011d36cbad905d3f[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Tue Jun 27 17:55:23 2017 +0000
+
+    add console log for url addAlias
+
+[33mcommit 5ec88e4d05eee5b2ab178756e919ed235f99847e[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Mon Jun 26 20:37:40 2017 +0000
+
+    fix getAlias start
+
+[33mcommit cc0f8fdb720a17f08b4575909e871ac0201aa222[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Mon Jun 26 20:33:26 2017 +0000
+
+    test
+
+[33mcommit b3c132fc43a44f0aa1a147760843057ca532da4f[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Mon Jun 26 15:15:31 2017 +0000
+
+    maintence window, add alias function fix
+
+[33mcommit d82dba9fefdf6c3bef702cc98337747539a44087[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Mon Jun 26 14:56:15 2017 +0000
+
+    maintence window, add alias function fix
+
+[33mcommit d19ea5a047699e5df38a9ebe811d1aa16bc954d1[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Mon Jun 26 14:23:01 2017 +0000
+
+    maintence window, add alias
+
+[33mcommit d7e5abf2bc0f4b737183c7712dfa51e0296e6b35[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Mon Jun 26 12:57:59 2017 +0000
+
+    maintence window, refresh button add
+
+[33mcommit eaef71d2925fc1939fbaa05ffd99493e759cf365[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Mon Jun 26 11:22:14 2017 +0000
+
+    overviewchart function fix, weekoverview iteration
+
+[33mcommit ba7588dbe60a4ce8a7012368ed078f426b0eaf07[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Mon Jun 26 10:47:57 2017 +0000
+
+    getAlias function fix
+
+[33mcommit b43c3b907f114bb32ea780fef1332510f226bbca[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Mon Jun 26 09:28:01 2017 +0000
+
+    getAlias function created
+
+[33mcommit 7d6b9528e6378e7c091e2c1bd0b052af9b52f88b[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Mon Jun 26 09:25:34 2017 +0000
+
+    getAlias function created
+
+[33mcommit e13219f6227bdd8b38c4a81b70e30a16aad69b0f[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Thu Jun 22 20:47:01 2017 +0000
+
+    homepage change size
+
+[33mcommit 59a5f609e430aec0dbddafc73b6271a55a0f8349[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Thu Jun 22 20:32:37 2017 +0000
+
+    fix homechart
+
+[33mcommit a5396717d3b1b8b417eb0cd516cc06f46a992e23[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Thu Jun 22 19:41:57 2017 +0000
+
+    change homepage
+
+[33mcommit 51934e7decae99390e299c23daf5bea448602182[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Wed Jun 21 13:17:57 2017 +0000
+
+    add month and fix to day
+
+[33mcommit a9b6ba296abf573fefedabfaf04589d7b21574ff[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Wed Jun 21 11:51:19 2017 +0000
+
+    changes script.js
+
+[33mcommit c88dabcd140c696cf04f71589129c0609a18b9db[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Wed Jun 21 07:56:37 2017 +0000
+
+    changes script.js
+
+[33mcommit 5c866b05d70d559ecc52130705483b145e6f594d[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Mon Jun 19 20:02:40 2017 +0000
+
+    change according to couchdb view change
+
+[33mcommit 3427a86563bbb31947bd3411b671a92550015d6a[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Mon Jun 19 19:54:51 2017 +0000
+
+    xhttp fix
+
+[33mcommit 77bebb00f7f5cc2e44204f230c14f8dbf0f0f994[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Mon Jun 19 19:24:55 2017 +0000
+
+    changed timestamp
+
+[33mcommit 313949efdd58bd7b663fa397a22c6dac528b2020[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Fri Jun 16 14:08:41 2017 +0000
+
+    week pagina
+
+[33mcommit c02ea4ff9182ff5c144d3b7e49fe633a986f60a5[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Thu Jun 15 14:13:59 2017 +0000
+
+    onderhoudspagina table
+
+[33mcommit d63662bbc79c3a2211c0c8017c1a91b681839cb9[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Thu Jun 15 08:29:22 2017 +0000
+
+    onderhoudspagina
+
+[33mcommit 9a655b61f210a83d0c21e1747bc2e2025b54a2b7[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Wed Jun 7 14:57:08 2017 +0000
+
+    adjusted charts
+
+[33mcommit 065ddf2e5726f0b496cf8d8f6cf6d0c915a052cb[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Wed Jun 7 14:33:38 2017 +0000
+
+    removed src folder, added toggle function, fixed footer
+
+[33mcommit 3959d11655ba8d320214bc83d263d1b10df1b867[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Wed Jun 7 12:58:42 2017 +0000
+
+    added multiple pages hide/show
+
+[33mcommit 47ac46106ab79fd5b3625086240a0306bd90d7ea[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Wed Jun 7 08:46:07 2017 +0000
+
+    added dummy data
+
+[33mcommit 5fe3e0fca0bfc29905f161c9e42e7b4e98a17f45[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Wed Jun 7 07:29:15 2017 +0000
+
+    add dummy data messsage
+
+[33mcommit 1e1497f090dd7c50cd47d4fb50cc5446c2724e35[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Wed Jun 7 09:10:28 2017 +0200
+
+    new files
+
+[33mcommit 936f9603edc8e4e1dda787e27513b120351f78d3[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Fri Jun 2 10:24:44 2017 +0000
+
+    changes index.html
+
+[33mcommit 6056539244e0f72621c81616213c271854d06794[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Tue Apr 4 20:08:24 2017 +0200
+
+    Add files via upload
+
+[33mcommit bf42ce876853987f19c85f38bd60ac0e4815d57b[m
+Author: Jacob van de Groep <jaapgroep@hotmail.com>
+Date:   Tue Apr 4 20:07:16 2017 +0200
+
+    Initial commit
