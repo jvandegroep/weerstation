@@ -125,7 +125,7 @@ function setHomeChart(level, unitName, station, chartID, view){
   var startparams=[unitName, station];
 	var endparams=[unitName, station,{}];
 
-  fullURL= DBURL + view +'?group_level=' + level + '&startkey='+ JSON.stringify(startparams)+'&endkey='+JSON.stringify(endparams);
+  var fullURL= DBURL + view +'?group_level=' + level + '&startkey='+ JSON.stringify(startparams)+'&endkey='+JSON.stringify(endparams);
 
   if (unitName == "temp") { unit = " ℃";} else { unit = " %";}
   console.log("setHomeChart - unit=", unit, "startparams=", startparams, "FullURL: ", fullURL);
@@ -635,6 +635,32 @@ function convertStartParam(stationName) {
   }
   return startstation;
 }
+
+// google SSO get person info
+function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  document.getElementById('userName').innerHTML = 'Welcome ' + profile.getName();
+  document.getElementById('userPhoto').innerHTML = '<img id=\"userImg\" src=\"' + profile.getImageUrl() + "\" alt=\"user photo\">";
+  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+  document.getElementById('userName').style.display = 'block';
+  document.getElementById('userPhoto').style.display = 'block';
+  document.getElementById('signOut').style.display = 'block';
+  document.getElementById('signIn').style.display = 'none';
+}
+
+// google SSO sign out function
+function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+      document.getElementById('signOut').style.display = 'none';
+      document.getElementById('signIn').style.display = 'block';
+      document.getElementById('userName').style.display = 'none';
+      document.getElementById('userPhoto').style.display = 'none';
+    });
+  }
+
 
 // LOAD WHEN READY AND LOAD PAGES WHEN CLICKED
   $(document).ready(function() {

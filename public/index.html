@@ -4,6 +4,7 @@
   <title>Weerstation Wilde Zwaan</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-signin-client_id" content="708620677285-o5ru2s6fd8pj4bejaujg7jgbndj5bvhp.apps.googleusercontent.com">
 
     <!-- jquery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -16,6 +17,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+  <!-- google js (SSO) -->
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
 
   <!-- Local -->
   <link rel="stylesheet" type="text/css" href="./css/style.css">
@@ -52,7 +56,10 @@
           <li><a href="#" id="hrefAbout">Over Ons</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <li id="userName" style="display: none"></li>
+          <li id="userPhoto" style="display: none"></li>
+          <li><div id="signIn" class="g-signin2" data-onsuccess="onSignIn"></div></li>
+          <li id="signOut" style="display: none"><a href="#" onclick="signOut();">Sign out</a></li>
         </ul>
       </div>
     </div>

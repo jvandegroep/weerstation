@@ -17,6 +17,16 @@
   width: auto;
 }
 
+#userImg {
+  height: 50px;
+}
+
+#userName {
+  padding-top: 15px;
+  padding-right: 5px;
+  color: white;
+}
+
 .customJumboBG{
   /* background-image: url("/img/clouds.jpg"); */
   background-size: 100%;
@@ -55,11 +65,13 @@ html {
   min-height: 100%;
   font-family: "-apple-system","system-ui","BlinkMacSystemFont","Segoe UI","Roboto","Helvetica Neue","Arial","sans-serif";
 }
+
 body {
   /* Margin bottom by footer height */
   margin-bottom: 40px;
   font-family: "-apple-system","system-ui","BlinkMacSystemFont","Segoe UI","Roboto","Helvetica Neue","Arial","sans-serif";
 }
+
 .footer {
   position: absolute;
   bottom: 0;
