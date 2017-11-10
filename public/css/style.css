@@ -27,6 +27,10 @@
   color: white;
 }
 
+#signIn {
+  padding-top: 6px;
+}
+
 .customJumboBG{
   /* background-image: url("/img/clouds.jpg"); */
   background-size: 100%;
